@@ -17,7 +17,7 @@ export class Game {
         this._sceneNext = value;
     }
 
-    public initialize() {
+    constructor() {
         this._renderer = new WebGLRenderer();
         this._assets = new GameAssets();
         this._scene = null;
