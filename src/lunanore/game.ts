@@ -1,6 +1,6 @@
 import { Clock, WebGLRenderer } from "three";
-import { GameScene } from "./game-scene.js";
-import { GameAssets } from "./game-assets.js";
+import { GameScene } from "./game-scene";
+import { GameAssets } from "./game-assets";
 
 export class Game {
     private _sceneNext: GameScene = null;

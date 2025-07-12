@@ -1,6 +1,6 @@
 import { AmbientLight, DirectionalLight, Light, PerspectiveCamera, Scene, WebGLRenderer } from "three";
-import { GameObject } from "./game-object.js";
-import { GameAssets } from "./game-assets.js";
+import { GameObject } from "./game-object";
+import { GameAssets } from "./game-assets";
 
 export abstract class GameScene {
     private _objects: GameObject[] = [];

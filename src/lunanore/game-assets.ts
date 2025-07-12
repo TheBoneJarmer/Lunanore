@@ -1,5 +1,5 @@
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { Model } from "./model.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { Model } from "./model";
 
 export class GameAssets {
     private _gltfLoader: GLTFLoader;

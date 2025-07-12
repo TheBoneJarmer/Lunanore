@@ -1,9 +1,9 @@
-import { Game } from "../../lunanore/game.js";
-import { GameScene } from "../../lunanore/game-scene.js";
-import { GameAssets } from "../../lunanore/game-assets.js";
 import { MeshPhongMaterial, WebGLRenderer } from "three";
-import { GameObject } from "../../lunanore/game-object.js";
-import { Model } from "../../lunanore/model.js";
+import { Game } from "../../lunanore/game";
+import { GameScene } from "../../lunanore/game-scene";
+import { GameAssets } from "../../lunanore/game-assets";
+import { GameObject } from "../../lunanore/game-object";
+import { Model } from "../../lunanore/model";
 
 class Cube extends GameObject {
     public async update(dt: number) {

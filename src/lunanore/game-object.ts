@@ -1,5 +1,5 @@
 import { Euler, Vector3 } from "three";
-import { Model } from "./model.js";
+import { Model } from "./model";
 
 export abstract class GameObject {
     private static _count: number = 0;
