@@ -21,7 +21,7 @@ class SceneMain extends GameScene {
         const mat = new MeshPhongMaterial();
         mat.color.set("#00ff00");
 
-        this._model = Model.cube();
+        this._model = Model.cube(1, mat);
         this._cube = new Cube("cube", this._model);
         this.add(this._cube);
 

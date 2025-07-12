@@ -8,6 +8,7 @@ import {
     Group,
     LoopOnce,
     LoopRepeat,
+    Material,
     Mesh,
     MeshBasicMaterial,
     PlaneGeometry,
@@ -87,7 +88,7 @@ export class Model {
     }
 
     /* STATIC FUNCTIONS */
-    public static cube(size: number = 1, mat: MeshBasicMaterial = null): Model {
+    public static cube(size: number = 1, mat: Material = null): Model {
         let geom = new BoxGeometry(size, size, size);
 
         if (mat == null) {
@@ -101,7 +102,7 @@ export class Model {
         return model;
     }
 
-    public static sphere(radius: number = 1, widthSegments: number = 16, heightSegments: number = 12, mat: MeshBasicMaterial = null): Model {
+    public static sphere(radius: number = 1, widthSegments: number = 16, heightSegments: number = 12, mat: Material = null): Model {
         let geom = new SphereGeometry(radius, widthSegments, heightSegments);
 
         if (mat == null) {
@@ -115,7 +116,7 @@ export class Model {
         return model;
     }
 
-    public static cone(radius: number = 1, height: number = 2, radialSegments: number = 16, mat: MeshBasicMaterial = null): Model {
+    public static cone(radius: number = 1, height: number = 2, radialSegments: number = 16, mat: Material = null): Model {
         let geom = new ConeGeometry(radius, height, radialSegments);
 
         if (mat == null) {
@@ -129,7 +130,7 @@ export class Model {
         return model;
     }
 
-    public static box(width: number = 1, height: number = 1, depth: number = 1, mat: MeshBasicMaterial = null): Model {
+    public static box(width: number = 1, height: number = 1, depth: number = 1, mat: Material = null): Model {
         let geom = new BoxGeometry(width, height, depth);
 
         if (mat == null) {
@@ -143,7 +144,7 @@ export class Model {
         return model;
     }
 
-    public static cylinder(radiusTop: number = 1, radiusBottom: number = 1, height: number = 2, radialSegments: number = 16, mat: MeshBasicMaterial = null): Model {
+    public static cylinder(radiusTop: number = 1, radiusBottom: number = 1, height: number = 2, radialSegments: number = 16, mat: Material = null): Model {
         let geom = new CylinderGeometry(radiusTop, radiusBottom, height, radialSegments);
 
         if (mat == null) {
@@ -157,7 +158,7 @@ export class Model {
         return model;
     }
 
-    public static torus(radius: number = 1, tube: number = 0.4, radialSegments: number = 16, tubularSegments: number = 100, mat: MeshBasicMaterial = null): Model {
+    public static torus(radius: number = 1, tube: number = 0.4, radialSegments: number = 16, tubularSegments: number = 100, mat: Material = null): Model {
         let geom = new TorusGeometry(radius, tube, radialSegments, tubularSegments);
 
         if (mat == null) {
@@ -171,7 +172,7 @@ export class Model {
         return model;
     }
 
-    public static plane(width: number = 1, height: number = 1, widthSegments: number = 1, heightSegments: number = 1, mat: MeshBasicMaterial = null): Model {
+    public static plane(width: number = 1, height: number = 1, widthSegments: number = 1, heightSegments: number = 1, mat: Material = null): Model {
         let geom = new PlaneGeometry(width, height, widthSegments, heightSegments);
 
         if (mat == null) {
