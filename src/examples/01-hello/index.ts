@@ -9,7 +9,7 @@ class Cube extends GameObject {
     private _rotate: boolean = true;
 
     public async update(dt: number) {
-        const speed = 0.1 * dt;
+        const speed = 0.2 * dt;
 
         if (Keyboard.keyPressed(Keys.Space)) {
             this._rotate = !this._rotate;
@@ -18,9 +18,9 @@ class Cube extends GameObject {
         }
 
         if (this._rotate) {
-            this.rotation.x += speed;
+            //this.rotation.x += speed;
             this.rotation.y += speed;
-            this.rotation.z += speed;
+            //this.rotation.z += speed;
         }
 
         await super.update(dt);
