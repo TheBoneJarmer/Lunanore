@@ -1,6 +1,6 @@
 import { AmbientLight, DirectionalLight, Light, PerspectiveCamera, Scene, WebGLRenderer } from "three";
 import { GameObject } from "./game-object";
-import { GameAssets } from "./game-assets";
+import { AssetLoader } from "./asset-loader";
 
 export abstract class GameScene {
     private _objects: GameObject[] = [];
@@ -74,7 +74,7 @@ export abstract class GameScene {
         renderer.render(this._scene, this._camera);
     }
 
-    public async init(assets: GameAssets) {
+    public async init() {
         this.clear();
     }
 }

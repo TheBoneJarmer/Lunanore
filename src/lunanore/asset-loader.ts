@@ -1,14 +1,10 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { Model } from "./model";
 
-export class GameAssets {
-    private _gltfLoader: GLTFLoader;
+export class AssetLoader {
+    private static _gltfLoader = new GLTFLoader();
 
-    constructor() {
-        this._gltfLoader = new GLTFLoader();
-    }
-
-    public async loadModel(path: string): Promise<Model> {
+    public static async loadModel(path: string): Promise<Model> {
         if (path.endsWith(".glb") || path.endsWith(".gltf")) {
             return await this.loadModel_GLTF(path);
         }
@@ -16,7 +12,7 @@ export class GameAssets {
         throw new Error("Unsupported model format");
     }
 
-    private async loadModel_GLTF(path: string): Promise<Model> {
+    private static async loadModel_GLTF(path: string): Promise<Model> {
         const gltf = await this._gltfLoader.loadAsync(path, undefined);
 
         const model = new Model();

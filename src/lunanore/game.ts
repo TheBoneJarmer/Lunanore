@@ -1,66 +1,75 @@
 import { Clock, WebGLRenderer } from "three";
 import { GameScene } from "./game-scene";
-import { GameAssets } from "./game-assets";
+import { Keyboard } from "./keyboard";
+import { Cursor } from "./cursor";
 
 export class Game {
-    private _sceneNext: GameScene = null;
-    private _scene: GameScene = null;
-    private _renderer: WebGLRenderer = null;
-    private _assets: GameAssets = null;
-    private _clock: Clock = null;
+    private static _handle: number = -1;
+    private static _sceneNext: GameScene = null;
+    private static _scene: GameScene = null;
+    private static _renderer: WebGLRenderer = null;
+    private static _clock: Clock = new Clock();
 
-    public get scene(): GameScene {
-        return this._scene;
+    public static get canvas(): HTMLCanvasElement {
+        return Game._renderer?.domElement;
     }
 
-    public set scene(value: GameScene) {
-        this._sceneNext = value;
+    public static get scene(): GameScene {
+        return Game._scene;
     }
 
-    constructor() {
-        this._renderer = new WebGLRenderer();
-        this._assets = new GameAssets();
-        this._scene = null;
-        this._sceneNext = null;
-        this._clock = new Clock();
+    public static set scene(value: GameScene) {
+        Game._sceneNext = value;
     }
 
-    public run() {
-        window.addEventListener("resize", this.onResize);
+    public static async init() {
+        Game._clock = new Clock();
+        Game._renderer = new WebGLRenderer();
+        Game._renderer.setSize(innerWidth, innerHeight);
+        document.body.appendChild(Game._renderer.domElement);
 
-        this._renderer.setSize(innerWidth, innerHeight);
-        this._renderer.setAnimationLoop(async () => {
-            await this.onAnimate();
-        });
+        window.addEventListener("resize", Game.resize);
 
-        document.body.appendChild(this._renderer.domElement);
+        Keyboard.init();
+        Cursor.init();
     }
 
-    /* HELPER FUNCTIONS */
+    public static async run() {
+        try {
+            if (Game._sceneNext != null) {
+                Game._scene = Game._sceneNext;
+                Game._sceneNext = null;
 
-    /* CALLBACKS */
-    private async onAnimate() {
-        if (this._sceneNext != null) {
-            this._scene = this._sceneNext;
-            this._sceneNext = null;
+                await Game._scene.init();
+            }
 
-            await this._scene.init(this._assets);
+            if (Game._scene != null) {
+                await Game._scene.update(Game._clock.getDelta());
+                await Game._scene.render(Game._renderer);
+            }
+
+            Keyboard.update();
+            Cursor.update();
+        } catch (error) {
+            console.error("An error occurred during the game loop");
+            console.error(error);
+
+            cancelAnimationFrame(this._handle);
+            Game._handle = -1;
+            return;
         }
 
-        if (this._scene != null) {
-            await this._scene.update(this._clock.getDelta());
-            await this._scene.render(this._renderer);
-        }
+        Game._handle = requestAnimationFrame(Game.run);
     }
 
-    private onResize = () => {
-        if (this._scene != null) {
-            this._scene.camera.aspect = innerWidth / innerHeight;
-            this._scene.camera.updateProjectionMatrix();
+    public static resize() {
+        if (Game._scene != null) {
+            Game._scene.camera.aspect = innerWidth / innerHeight;
+            Game._scene.camera.updateProjectionMatrix();
         }
 
-        if (this._renderer != null) {
-            this._renderer.setSize(innerWidth, innerHeight);
+        if (Game._renderer != null) {
+            Game._renderer.setSize(innerWidth, innerHeight);
         }
     };
 }

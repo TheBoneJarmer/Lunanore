@@ -25,15 +25,15 @@ export abstract class GameObject {
     }
 
     public get position(): Vector3 {
-        return this._model.data.position;
+        return this._model.position;
     }
 
     public get rotation(): Euler {
-        return this._model.data.rotation;
+        return this._model.rotation;
     }
 
     public get scale(): Vector3 {
-        return this._model.data.scale;
+        return this._model.scale;
     }
 
     constructor(tag: string, model: Model) {

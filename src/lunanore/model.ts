@@ -5,6 +5,7 @@ import {
     BoxGeometry,
     ConeGeometry,
     CylinderGeometry,
+    Euler,
     Group,
     LoopOnce,
     LoopRepeat,
@@ -13,13 +14,18 @@ import {
     MeshBasicMaterial,
     PlaneGeometry,
     SphereGeometry,
-    TorusGeometry
+    TorusGeometry,
+    TorusKnotGeometry,
+    Vector3
 } from "three";
 import { SkeletonUtils } from "three/examples/jsm/Addons.js";
 
 export class Model {
     private _mixer: AnimationMixer = null;
     private _data: Group = null;
+    private _position: Vector3 = new Vector3();
+    private _rotation: Euler = new Euler(0, 0, 0);
+    private _scale: Vector3 = new Vector3(1, 1, 1);
     private _animations: AnimationClip[] = [];
 
     public get data(): Group {
@@ -37,6 +43,30 @@ export class Model {
 
     public set animations(value: AnimationClip[]) {
         this._animations = value;
+    }
+
+    public get position(): Vector3 {
+        return this._position;
+    }
+
+    public set position(value: Vector3) {
+        this._position = value;
+    }
+
+    public get rotation(): Euler {
+        return this._rotation;
+    }
+
+    public set rotation(value: Euler) {
+        this._rotation = value;
+    }
+
+    public get scale(): Vector3 {
+        return this._scale;
+    }
+
+    public set scale(value: Vector3) {
+        this._scale = value;
     }
 
     public clone(): Model {
@@ -62,6 +92,10 @@ export class Model {
     }
 
     public async update(dt: number) {
+        this._data.position.copy(this._position);
+        this._data.rotation.copy(this._rotation);
+        this._data.scale.copy(this._scale);
+
         this._mixer.update(dt);
     }
 
@@ -160,6 +194,20 @@ export class Model {
 
     public static torus(radius: number = 1, tube: number = 0.4, radialSegments: number = 16, tubularSegments: number = 100, mat: Material = null): Model {
         let geom = new TorusGeometry(radius, tube, radialSegments, tubularSegments);
+
+        if (mat == null) {
+            mat = new MeshBasicMaterial();
+        }
+
+        const mesh = new Mesh(geom, mat);
+        const model = new Model();
+        model.data.add(mesh);
+
+        return model;
+    }
+
+    public static torusKnot(radius: number = 1, tube: number = 0.4, tubularSegments: number = 100, radialSegments: number = 16, p: number = 2, q: number = 3, mat: Material = null): Model {
+        let geom = new TorusKnotGeometry(radius, tube, tubularSegments, radialSegments, p, q);
 
         if (mat == null) {
             mat = new MeshBasicMaterial();
