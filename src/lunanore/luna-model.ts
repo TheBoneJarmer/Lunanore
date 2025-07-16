@@ -20,7 +20,7 @@ import {
 } from "three";
 import { SkeletonUtils } from "three/examples/jsm/Addons.js";
 
-export class Model {
+export class LunaModel {
     private _mixer: AnimationMixer = null;
     private _data: Group = null;
     private _position: Vector3 = new Vector3();
@@ -69,8 +69,8 @@ export class Model {
         this._scale = value;
     }
 
-    public clone(): Model {
-        let result = new Model();
+    public clone(): LunaModel {
+        let result = new LunaModel();
 
         for (let obj of this._data.children) {
             const clone = SkeletonUtils.clone(obj);
@@ -122,7 +122,7 @@ export class Model {
     }
 
     /* STATIC FUNCTIONS */
-    public static cube(size: number = 1, mat: Material = null): Model {
+    public static cube(size: number = 1, mat: Material = null): LunaModel {
         let geom = new BoxGeometry(size, size, size);
 
         if (mat == null) {
@@ -130,13 +130,13 @@ export class Model {
         }
 
         const mesh = new Mesh(geom, mat);
-        const model = new Model();
+        const model = new LunaModel();
         model.data.add(mesh);
 
         return model;
     }
 
-    public static sphere(radius: number = 1, widthSegments: number = 16, heightSegments: number = 12, mat: Material = null): Model {
+    public static sphere(radius: number = 1, widthSegments: number = 16, heightSegments: number = 12, mat: Material = null): LunaModel {
         let geom = new SphereGeometry(radius, widthSegments, heightSegments);
 
         if (mat == null) {
@@ -144,13 +144,13 @@ export class Model {
         }
 
         const mesh = new Mesh(geom, mat);
-        const model = new Model();
+        const model = new LunaModel();
         model.data.add(mesh);
 
         return model;
     }
 
-    public static cone(radius: number = 1, height: number = 2, radialSegments: number = 16, mat: Material = null): Model {
+    public static cone(radius: number = 1, height: number = 2, radialSegments: number = 16, mat: Material = null): LunaModel {
         let geom = new ConeGeometry(radius, height, radialSegments);
 
         if (mat == null) {
@@ -158,13 +158,13 @@ export class Model {
         }
 
         const mesh = new Mesh(geom, mat);
-        const model = new Model();
+        const model = new LunaModel();
         model.data.add(mesh);
 
         return model;
     }
 
-    public static box(width: number = 1, height: number = 1, depth: number = 1, mat: Material = null): Model {
+    public static box(width: number = 1, height: number = 1, depth: number = 1, mat: Material = null): LunaModel {
         let geom = new BoxGeometry(width, height, depth);
 
         if (mat == null) {
@@ -172,13 +172,13 @@ export class Model {
         }
 
         const mesh = new Mesh(geom, mat);
-        const model = new Model();
+        const model = new LunaModel();
         model.data.add(mesh);
 
         return model;
     }
 
-    public static cylinder(radiusTop: number = 1, radiusBottom: number = 1, height: number = 2, radialSegments: number = 16, mat: Material = null): Model {
+    public static cylinder(radiusTop: number = 1, radiusBottom: number = 1, height: number = 2, radialSegments: number = 16, mat: Material = null): LunaModel {
         let geom = new CylinderGeometry(radiusTop, radiusBottom, height, radialSegments);
 
         if (mat == null) {
@@ -186,13 +186,13 @@ export class Model {
         }
 
         const mesh = new Mesh(geom, mat);
-        const model = new Model();
+        const model = new LunaModel();
         model.data.add(mesh);
 
         return model;
     }
 
-    public static torus(radius: number = 1, tube: number = 0.4, radialSegments: number = 16, tubularSegments: number = 100, mat: Material = null): Model {
+    public static torus(radius: number = 1, tube: number = 0.4, radialSegments: number = 16, tubularSegments: number = 100, mat: Material = null): LunaModel {
         let geom = new TorusGeometry(radius, tube, radialSegments, tubularSegments);
 
         if (mat == null) {
@@ -200,13 +200,13 @@ export class Model {
         }
 
         const mesh = new Mesh(geom, mat);
-        const model = new Model();
+        const model = new LunaModel();
         model.data.add(mesh);
 
         return model;
     }
 
-    public static torusKnot(radius: number = 1, tube: number = 0.4, tubularSegments: number = 100, radialSegments: number = 16, p: number = 2, q: number = 3, mat: Material = null): Model {
+    public static torusKnot(radius: number = 1, tube: number = 0.4, tubularSegments: number = 100, radialSegments: number = 16, p: number = 2, q: number = 3, mat: Material = null): LunaModel {
         let geom = new TorusKnotGeometry(radius, tube, tubularSegments, radialSegments, p, q);
 
         if (mat == null) {
@@ -214,13 +214,13 @@ export class Model {
         }
 
         const mesh = new Mesh(geom, mat);
-        const model = new Model();
+        const model = new LunaModel();
         model.data.add(mesh);
 
         return model;
     }
 
-    public static plane(width: number = 1, height: number = 1, widthSegments: number = 1, heightSegments: number = 1, mat: Material = null): Model {
+    public static plane(width: number = 1, height: number = 1, widthSegments: number = 1, heightSegments: number = 1, mat: Material = null): LunaModel {
         let geom = new PlaneGeometry(width, height, widthSegments, heightSegments);
 
         if (mat == null) {
@@ -228,7 +228,7 @@ export class Model {
         }
 
         const mesh = new Mesh(geom, mat);
-        const model = new Model();
+        const model = new LunaModel();
         model.data.add(mesh);
 
         return model;

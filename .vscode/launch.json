@@ -1,0 +1,26 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "01 - hello",
+            "runtimeExecutable": "vite",
+            "cwd": "${workspaceFolder}/src/examples/01-hello",
+            "internalConsoleOptions": "neverOpen",
+            "args": []
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "02 - animations",
+            "runtimeExecutable": "vite",
+            "cwd": "${workspaceFolder}/src/examples/02-animations",
+            "internalConsoleOptions": "neverOpen",
+            "args": []
+        }
+    ]
+}

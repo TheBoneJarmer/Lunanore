@@ -1,17 +1,13 @@
-import { EdgesGeometry, LineBasicMaterial, LineSegments, Mesh, MeshBasicMaterial, MeshLambertMaterial, MeshPhongMaterial, TorusKnotGeometry, WebGLRenderer } from "three";
-import { Game } from "../../lunanore/game";
-import { GameScene } from "../../lunanore/game-scene";
-import { GameObject } from "../../lunanore/game-object";
-import { Model } from "../../lunanore/model";
-import { Keyboard, Keys } from "../../lunanore/keyboard";
+import { MeshPhongMaterial, WebGLRenderer } from "three";
+import { Lunanore, LunaKey, LunaKeyboard, LunaModel, LunaObject, LunaScene } from "../../lunanore";
 
-class Cube extends GameObject {
+class Cube extends LunaObject {
     private _rotate: boolean = true;
 
     public async update(dt: number) {
         const speed = 0.2 * dt;
 
-        if (Keyboard.keyPressed(Keys.Space)) {
+        if (LunaKeyboard.keyPressed(LunaKey.Space)) {
             this._rotate = !this._rotate;
 
             console.log(`Rotation ${this._rotate ? "enabled" : "disabled"}`);
@@ -27,8 +23,8 @@ class Cube extends GameObject {
     }
 }
 
-class SceneMain extends GameScene {
-    private _model: Model | null = null;
+class SceneMain extends LunaScene {
+    private _model: LunaModel | null = null;
     private _cube: Cube | null = null;
 
     public async init() {
@@ -38,7 +34,7 @@ class SceneMain extends GameScene {
         mat.color.set("#4784a7");
         mat.flatShading = true;
 
-        this._model = Model.torusKnot(1, 0.4, 32, 4, 2, 3, mat);
+        this._model = LunaModel.torusKnot(1, 0.4, 32, 4, 2, 3, mat);
         this._cube = new Cube("cube", this._model);
         this.add(this._cube);
 
@@ -55,7 +51,7 @@ class SceneMain extends GameScene {
     }
 }
 
-Game.init().then(() => {
-    Game.scene = new SceneMain();
-    Game.run();
+Lunanore.init().then(() => {
+    Lunanore.scene = new SceneMain();
+    Lunanore.run();
 });

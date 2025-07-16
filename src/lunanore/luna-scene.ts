@@ -1,9 +1,8 @@
 import { AmbientLight, DirectionalLight, Light, PerspectiveCamera, Scene, WebGLRenderer } from "three";
-import { GameObject } from "./game-object";
-import { AssetLoader } from "./asset-loader";
+import { LunaObject } from "./luna-object";
 
-export abstract class GameScene {
-    private _objects: GameObject[] = [];
+export abstract class LunaScene {
+    private _objects: LunaObject[] = [];
     private _scene: Scene = null;
     private _camera: PerspectiveCamera = null;
     private _light: Light = null;
@@ -37,7 +36,7 @@ export abstract class GameScene {
         this._ambient = value;
     }
 
-    public get objects(): GameObject[] {
+    public get objects(): LunaObject[] {
         return this._objects;
     }
 
@@ -55,7 +54,7 @@ export abstract class GameScene {
         this._scene.add(this._ambient);
     }
 
-    public async add(obj: GameObject) {
+    public async add(obj: LunaObject) {
         this._objects.push(obj);
 
         if (obj.model != null) {

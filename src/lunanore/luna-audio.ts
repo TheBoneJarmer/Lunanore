@@ -1,9 +1,9 @@
-export enum SoundStatus {
+export enum LunaSoundStatus {
     STOPPED,
     PLAYING
 }
 
-export class Sound {
+export class LunaSound {
     private _buffer: AudioBuffer;
 
     public get buffer() {
@@ -13,23 +13,23 @@ export class Sound {
     constructor(path: string) {
         fetch(path).then(async (res) => {
             const arrayBuffer = await res.arrayBuffer();
-            const audioBuffer = await Audio.ctx.decodeAudioData(arrayBuffer);
+            const audioBuffer = await LunaAudio.ctx.decodeAudioData(arrayBuffer);
 
             this._buffer = audioBuffer;
         });
     }
 }
 
-export class SoundInstance {
+export class LunaSoundInstance {
     private _srcNode: AudioBufferSourceNode;
     private _gainNode: GainNode;
-    private _status: SoundStatus;
+    private _status: LunaSoundStatus;
 
     public get source(): AudioBufferSourceNode {
         return this._srcNode;
     }
 
-    public get status(): SoundStatus {
+    public get status(): LunaSoundStatus {
         return this._status;
     }
 
@@ -61,10 +61,10 @@ export class SoundInstance {
         this._gainNode = gainNode;
         this._srcNode = srcNode;
         this._srcNode.onended = () => {
-            this._status = SoundStatus.STOPPED;
+            this._status = LunaSoundStatus.STOPPED;
         };
 
-        this._status = SoundStatus.PLAYING;
+        this._status = LunaSoundStatus.PLAYING;
     }
 
     public stop() {
@@ -72,7 +72,7 @@ export class SoundInstance {
     }
 }
 
-export class Audio {
+export class LunaAudio {
     private static _ctx: AudioContext;
 
     public static get ctx(): AudioContext {
@@ -83,7 +83,7 @@ export class Audio {
         return this._ctx;
     }
 
-    public static async play(sound: Sound): Promise<SoundInstance> {
+    public static async play(sound: LunaSound): Promise<LunaSoundInstance> {
         const gain = this.ctx.createGain();
         gain.connect(this.ctx.destination);
 
@@ -92,7 +92,7 @@ export class Audio {
         src.connect(gain);
         src.start();
 
-        return new SoundInstance(src, gain);
+        return new LunaSoundInstance(src, gain);
     }
 
     public static async suspend() {

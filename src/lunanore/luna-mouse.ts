@@ -1,6 +1,6 @@
-import { Game } from "./game";
+import { Lunanore } from "./lunanore";
 
-export class Cursor {
+export class LunaMouse {
     private static _states: number[] = [];
     private static _x: number = 0;
     private static _y: number = 0;
@@ -46,28 +46,28 @@ export class Cursor {
     }
 
     private static initListeners() {
-        const cnv = Game.canvas;
+        const cnv = Lunanore.canvas;
     
         cnv.addEventListener("pointerdown", (e) => {
-            Cursor._states[e.button] = 1;
-            Cursor._x = e.clientX - cnv.getBoundingClientRect().left;
-            Cursor._y = e.clientY - cnv.getBoundingClientRect().top;
+            LunaMouse._states[e.button] = 1;
+            LunaMouse._x = e.clientX - cnv.getBoundingClientRect().left;
+            LunaMouse._y = e.clientY - cnv.getBoundingClientRect().top;
         });
         cnv.addEventListener("pointermove", (e) => {
-            Cursor._prevX = Cursor._x;
-            Cursor._prevY = Cursor._y;
-            Cursor._x = e.clientX - cnv.getBoundingClientRect().left;
-            Cursor._y = e.clientY - cnv.getBoundingClientRect().top;
-            Cursor._moveX = Cursor._prevX - Cursor._x;
-            Cursor._moveY = Cursor._prevY - Cursor._y;
+            LunaMouse._prevX = LunaMouse._x;
+            LunaMouse._prevY = LunaMouse._y;
+            LunaMouse._x = e.clientX - cnv.getBoundingClientRect().left;
+            LunaMouse._y = e.clientY - cnv.getBoundingClientRect().top;
+            LunaMouse._moveX = LunaMouse._prevX - LunaMouse._x;
+            LunaMouse._moveY = LunaMouse._prevY - LunaMouse._y;
         });
         cnv.addEventListener("pointerup", (e) => {
-            if (Cursor._states[e.button] === 2) {
-                Cursor._states[e.button] = 3;
+            if (LunaMouse._states[e.button] === 2) {
+                LunaMouse._states[e.button] = 3;
             }
 
-            Cursor._x = e.clientX - cnv.getBoundingClientRect().left;
-            Cursor._y = e.clientY - cnv.getBoundingClientRect().top;
+            LunaMouse._x = e.clientX - cnv.getBoundingClientRect().left;
+            LunaMouse._y = e.clientY - cnv.getBoundingClientRect().top;
         });
 
         cnv.addEventListener("contextmenu", (e) => {
