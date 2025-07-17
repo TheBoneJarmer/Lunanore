@@ -43,7 +43,8 @@ export abstract class LunaObject {
         LunaObject._count++;
     }
 
+    /* OVERRIDES */
     public async update(dt: number) {
-        await this._model.update(dt);
+        
     }
 }

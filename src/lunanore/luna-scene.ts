@@ -12,6 +12,10 @@ export abstract class LunaScene {
         return this._scene;
     }
 
+    public get objects(): LunaObject[] {
+        return this._objects;
+    }
+
     public get camera(): PerspectiveCamera {
         return this._camera;
     }
@@ -34,10 +38,6 @@ export abstract class LunaScene {
 
     public set ambient(value: AmbientLight) {
         this._ambient = value;
-    }
-
-    public get objects(): LunaObject[] {
-        return this._objects;
     }
 
     constructor() {
@@ -64,16 +64,10 @@ export abstract class LunaScene {
 
     /* OVERRIDES */
     public async update(dt: number) {
-        for (let obj of this._objects) {
-            await obj.update(dt);
-        }
-    }
-
-    public async render(renderer: WebGLRenderer) {
-        renderer.render(this._scene, this._camera);
+        
     }
 
     public async init() {
-        this.clear();
+        
     }
 }

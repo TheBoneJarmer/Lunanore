@@ -40,12 +40,21 @@ export class Lunanore {
                 Lunanore._scene = Lunanore._sceneNext;
                 Lunanore._sceneNext = null;
 
+                await Lunanore._scene.clear();
                 await Lunanore._scene.init();
             }
 
             if (Lunanore._scene != null) {
-                await Lunanore._scene.update(Lunanore._clock.getDelta());
-                await Lunanore._scene.render(Lunanore._renderer);
+                const dt = Lunanore._clock.getDelta();
+
+                for (let obj of Lunanore._scene.objects) {
+                    await obj.model.update(dt);
+                    await obj.update(dt);
+                }
+
+                await Lunanore._scene.update(dt);
+                
+                Lunanore._renderer.render(Lunanore._scene.scene, Lunanore._scene.camera);
             }
 
             LunaKeyboard.update();
@@ -54,7 +63,7 @@ export class Lunanore {
             console.error("An error occurred during the game loop");
             console.error(error);
 
-            cancelAnimationFrame(this._handle);
+            cancelAnimationFrame(Lunanore._handle);
             Lunanore._handle = -1;
             return;
         }
