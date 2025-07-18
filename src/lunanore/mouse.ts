@@ -35,14 +35,13 @@ export class Mouse {
 
     public static init() {
         this.initStates();
+        this.initListeners();
     }
 
     private static initStates() {
         for (let i=0; i<10; i++) {
             this._states[i] = 0;
         }
-
-        this.initListeners();
     }
 
     private static initListeners() {

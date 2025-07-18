@@ -10,7 +10,6 @@ class SceneMain extends Scene {
     }
 }
 
-Lunanore.init().then(async () => {
-    Lunanore.scene = new SceneMain();
-    await Lunanore.run();
-});
+Lunanore.init();
+Lunanore.register("main", new SceneMain());
+Lunanore.run("main");

@@ -22,7 +22,6 @@ class ActorCube extends Actor {
 }
 
 class SceneMain extends Scene {
-    private _model: Model | null = null;
     private _cube: ActorCube | null = null;
 
     public async init() {
@@ -30,8 +29,8 @@ class SceneMain extends Scene {
         mat.color.set("#4784a7");
         mat.flatShading = true;
 
-        this._model = Model.torusKnot(1, 0.4, 32, 4, 2, 3, mat);
-        this._cube = new ActorCube("cube", this._model);
+        const model = Model.torusKnot(1, 0.4, 32, 4, 2, 3, mat);
+        this._cube = new ActorCube("cube", model);
         this.add(this._cube);
 
         this.camera.position.z = 5;
@@ -43,7 +42,6 @@ class SceneMain extends Scene {
     }
 }
 
-Lunanore.init().then(() => {
-    Lunanore.scene = new SceneMain();
-    Lunanore.run();
-});
+Lunanore.init();
+Lunanore.register("main", new SceneMain());
+Lunanore.run("main");

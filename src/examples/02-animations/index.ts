@@ -22,29 +22,28 @@ class ActorMage extends Actor {
 }
 
 class SceneMain extends Scene {
-    private _model: Model | null = null;
     private _mage: ActorMage | null = null;
     private _loop: boolean = false;
     private _anim: string = "";
     private _action: THREE.AnimationAction | null = null;
 
     public async init() {
-        await super.init();
-
         await this.initAssets();
         await this.initScene();
         await this.initControls();
     }
 
     private async initAssets() {
-        this._model = await Assets.loadModel("mage.glb");
+        await Assets.importModel("mage", "mage.glb");
     }
 
     private async initScene() {
+        const model = Assets.getModel("mage");
+
         this.camera.position.set(0, 2, 5);
         this.camera.rotation.set(THREE.MathUtils.DEG2RAD * -15, 0, 0);
 
-        this._mage = new ActorMage(this._model!);
+        this._mage = new ActorMage(model);
         this.add(this._mage);
     }
 
@@ -56,10 +55,10 @@ class SceneMain extends Scene {
 
         // Set defaults
         this._loop = true;
-        this._anim = this._model!.animations[0].name;
+        this._anim = this._mage!.model!.animations[0].name;
 
         // Update form elements
-        for (let anim of this._model!.animations) {
+        for (let anim of this._mage!.model!.animations) {
             const elOption = document.createElement("option");
             elOption.value = anim.name;
             elOption.innerText = anim.name;
@@ -119,7 +118,6 @@ class SceneMain extends Scene {
     }
 }
 
-Lunanore.init().then(async () => {
-    Lunanore.scene = new SceneMain();
-    await Lunanore.run();
-});
+Lunanore.init();
+Lunanore.register("main", new SceneMain());
+Lunanore.run("main");
