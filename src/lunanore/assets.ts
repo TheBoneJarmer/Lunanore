@@ -15,6 +15,14 @@ export class Assets {
         return model;
     }
 
+    public static async addModel(key: string, model: Model) {
+        if (this._models.has(key)) {
+            throw new Error("A model with this key already exists");
+        }
+
+        this._models.set(key, model);
+    }
+
     public static async importModel(key: string, path: string) {
         let model: Model | null = null;
 
@@ -23,7 +31,7 @@ export class Assets {
         }
 
         if (model != null) {
-            this._models.set(key, model);
+            await this.addModel(key, model);
             return;
         }
 

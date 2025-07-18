@@ -1,101 +1,5 @@
-export enum Keys {
-    Escape,
-    Up,
-    Down,
-    Left,
-    Right,
-    Space,
-    Enter,
-    LeftShift,
-    RightShift,
-    LeftCtrl,
-    RightCtrl,
-    Tab,
-    AltLeft,
-    AltRight,
-    Backspace,
-    Home,
-    End,
-    Insert,
-    Delete,
-    PageUp,
-    PageDown,
-    A,
-    B,
-    C,
-    D,
-    E,
-    F,
-    G,
-    H,
-    I,
-    J,
-    K,
-    L,
-    M,
-    N,
-    O,
-    P,
-    Q,
-    R,
-    S,
-    T,
-    U,
-    V,
-    W,
-    X,
-    Y,
-    Z,
-    D1,
-    D2,
-    D3,
-    D4,
-    D5,
-    D6,
-    D7,
-    D8,
-    D9,
-    D0,
-    Minus,
-    Equal,
-    BracketLeft,
-    BracketRight,
-    Backslash,
-    Slash,
-    Comma,
-    Period,
-    Semicolon,
-    Quote,
-    Backquote,
-    Numpad0,
-    Numpad1,
-    Numpad2,
-    Numpad3,
-    Numpad4,
-    Numpad5,
-    Numpad6,
-    Numpad7,
-    Numpad8,
-    Numpad9,
-    NumpadDivide,
-    NumpadMultiply,
-    NumpadSubtract,
-    NumpadAdd,
-    NumpadEnter,
-    NumpadDecimal,
-}
-
-class KeyState {
-    public code: string;
-    public key: Keys;
-    public value: number;
-
-    public constructor(code: string, key: Keys) {
-        this.code = code;
-        this.key = key;
-        this.value = 0;
-    }
-}
+import { Keys } from "./enums/keys";
+import { KeyState } from "./key-state";
 
 export class Keyboard {
     private static readonly _states: KeyState[] = [];
@@ -178,7 +82,7 @@ export class Keyboard {
         this._states.push(new KeyState('KeyX', Keys.X));
         this._states.push(new KeyState('KeyY', Keys.Y));
         this._states.push(new KeyState('KeyZ', Keys.Z));
-        
+
         this._states.push(new KeyState('Digit0', Keys.D0));
         this._states.push(new KeyState('Digit1', Keys.D1));
         this._states.push(new KeyState('Digit2', Keys.D2));
@@ -189,7 +93,7 @@ export class Keyboard {
         this._states.push(new KeyState('Digit7', Keys.D7));
         this._states.push(new KeyState('Digit8', Keys.D8));
         this._states.push(new KeyState('Digit9', Keys.D9));
-        
+
         this._states.push(new KeyState('Minus', Keys.Minus));
         this._states.push(new KeyState('Equal', Keys.Equal));
         this._states.push(new KeyState('BracketLeft', Keys.BracketLeft));
@@ -201,7 +105,7 @@ export class Keyboard {
         this._states.push(new KeyState('Semicolon', Keys.Semicolon));
         this._states.push(new KeyState('Backquote', Keys.Backquote));
         this._states.push(new KeyState('Quote', Keys.Quote));
-        
+
         this._states.push(new KeyState('Numpad0', Keys.Numpad0));
         this._states.push(new KeyState('Numpad1', Keys.Numpad1));
         this._states.push(new KeyState('Numpad2', Keys.Numpad2));

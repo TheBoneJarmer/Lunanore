@@ -5,11 +5,11 @@ import { Mouse } from "./mouse";
 
 export class Lunanore {
     private static _handle: number = -1;
-    private static _scenes: Map<string, Scene> = new Map();
+    private static _scenes: Map<string, Scene> = null;
     private static _sceneNext: string = null;
     private static _scene: string = null;
     private static _renderer: THREE.WebGLRenderer = null;
-    private static _clock: THREE.Clock = new THREE.Clock();
+    private static _clock: THREE.Clock = null;
 
     public static get canvas(): HTMLCanvasElement {
         return Lunanore._renderer?.domElement;
@@ -28,15 +28,12 @@ export class Lunanore {
     }
 
     public static init() {
-        this.initClock();
+        Lunanore._clock = new THREE.Clock();
+        Lunanore._scenes = new Map();
+        
         this.initRenderer();
         this.initInput();
         this.initEventListeners();
-    }
-
-    private static initClock() {
-        const clock = new THREE.Clock();
-        Lunanore._clock = clock;
     }
 
     private static initInput() {
@@ -86,7 +83,7 @@ export class Lunanore {
                 Lunanore._scene = Lunanore._sceneNext;
                 Lunanore._sceneNext = null;
 
-                await scene.clear();
+                scene.clear();
                 await scene.init();
             }
 

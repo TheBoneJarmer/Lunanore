@@ -47,14 +47,14 @@ export abstract class Scene {
         this._ambient = new THREE.AmbientLight("#aaaaaa", 0.5);
     }
 
-    public async clear() {
+    public clear() {
         this._actors = [];
         this._scene.clear();
         this._scene.add(this._light);
         this._scene.add(this._ambient);
     }
 
-    public async add(actor: Actor) {
+    public add(actor: Actor) {
         this._actors.push(actor);
 
         if (actor.model != null) {
