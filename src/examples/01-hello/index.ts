@@ -18,8 +18,6 @@ class Cube extends LunaObject {
             this.rotation.y += speed;
             //this.rotation.z += speed;
         }
-
-        await super.update(dt);
     }
 }
 
@@ -28,8 +26,6 @@ class SceneMain extends LunaScene {
     private _cube: Cube | null = null;
 
     public async init() {
-        super.init();
-
         const mat = new MeshPhongMaterial();
         mat.color.set("#4784a7");
         mat.flatShading = true;
@@ -44,10 +40,6 @@ class SceneMain extends LunaScene {
 
     public async update(dt: number) {
         super.update(dt);
-    }
-
-    public async render(renderer: WebGLRenderer) {
-        super.render(renderer);
     }
 }
 

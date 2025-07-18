@@ -7,7 +7,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "01 - hello",
+            "name": "01 - Hello",
             "runtimeExecutable": "vite",
             "cwd": "${workspaceFolder}/src/examples/01-hello",
             "internalConsoleOptions": "neverOpen",
@@ -16,9 +16,18 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "02 - animations",
+            "name": "02 - Animations",
             "runtimeExecutable": "vite",
             "cwd": "${workspaceFolder}/src/examples/02-animations",
+            "internalConsoleOptions": "neverOpen",
+            "args": []
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "03 - Shadows",
+            "runtimeExecutable": "vite",
+            "cwd": "${workspaceFolder}/src/examples/03-shadows",
             "internalConsoleOptions": "neverOpen",
             "args": []
         }

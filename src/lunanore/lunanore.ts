@@ -1,37 +1,37 @@
-import { Clock, WebGLRenderer } from "three";
-import { LunaScene } from "./luna-scene";
-import { LunaKeyboard } from "./luna-keyboard";
-import { LunaMouse } from "./luna-mouse";
+import * as THREE from "three";
+import { Scene } from "./scene";
+import { Keyboard } from "./keyboard";
+import { Mouse } from "./mouse";
 
 export class Lunanore {
     private static _handle: number = -1;
-    private static _sceneNext: LunaScene = null;
-    private static _scene: LunaScene = null;
-    private static _renderer: WebGLRenderer = null;
-    private static _clock: Clock = new Clock();
+    private static _sceneNext: Scene = null;
+    private static _scene: Scene = null;
+    private static _renderer: THREE.WebGLRenderer = null;
+    private static _clock: THREE.Clock = new THREE.Clock();
 
     public static get canvas(): HTMLCanvasElement {
         return Lunanore._renderer?.domElement;
     }
 
-    public static get scene(): LunaScene {
+    public static get scene(): Scene {
         return Lunanore._scene;
     }
 
-    public static set scene(value: LunaScene) {
+    public static set scene(value: Scene) {
         Lunanore._sceneNext = value;
     }
 
     public static async init() {
-        Lunanore._clock = new Clock();
-        Lunanore._renderer = new WebGLRenderer();
+        Lunanore._clock = new THREE.Clock();
+        Lunanore._renderer = new THREE.WebGLRenderer();
         Lunanore._renderer.setSize(innerWidth, innerHeight);
         document.body.appendChild(Lunanore._renderer.domElement);
 
         window.addEventListener("resize", Lunanore.resize);
 
-        LunaKeyboard.init();
-        LunaMouse.init();
+        Keyboard.init();
+        Mouse.init();
     }
 
     public static async run() {
@@ -47,7 +47,7 @@ export class Lunanore {
             if (Lunanore._scene != null) {
                 const dt = Lunanore._clock.getDelta();
 
-                for (let obj of Lunanore._scene.objects) {
+                for (let obj of Lunanore._scene.actors) {
                     await obj.model.update(dt);
                     await obj.update(dt);
                 }
@@ -57,8 +57,8 @@ export class Lunanore {
                 Lunanore._renderer.render(Lunanore._scene.scene, Lunanore._scene.camera);
             }
 
-            LunaKeyboard.update();
-            LunaMouse.update();
+            Keyboard.update();
+            Mouse.update();
         } catch (error) {
             console.error("An error occurred during the game loop");
             console.error(error);

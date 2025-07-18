@@ -1,6 +1,6 @@
 import { Lunanore } from "./lunanore";
 
-export class LunaMouse {
+export class Mouse {
     private static _states: number[] = [];
     private static _x: number = 0;
     private static _y: number = 0;
@@ -49,25 +49,25 @@ export class LunaMouse {
         const cnv = Lunanore.canvas;
     
         cnv.addEventListener("pointerdown", (e) => {
-            LunaMouse._states[e.button] = 1;
-            LunaMouse._x = e.clientX - cnv.getBoundingClientRect().left;
-            LunaMouse._y = e.clientY - cnv.getBoundingClientRect().top;
+            Mouse._states[e.button] = 1;
+            Mouse._x = e.clientX - cnv.getBoundingClientRect().left;
+            Mouse._y = e.clientY - cnv.getBoundingClientRect().top;
         });
         cnv.addEventListener("pointermove", (e) => {
-            LunaMouse._prevX = LunaMouse._x;
-            LunaMouse._prevY = LunaMouse._y;
-            LunaMouse._x = e.clientX - cnv.getBoundingClientRect().left;
-            LunaMouse._y = e.clientY - cnv.getBoundingClientRect().top;
-            LunaMouse._moveX = LunaMouse._prevX - LunaMouse._x;
-            LunaMouse._moveY = LunaMouse._prevY - LunaMouse._y;
+            Mouse._prevX = Mouse._x;
+            Mouse._prevY = Mouse._y;
+            Mouse._x = e.clientX - cnv.getBoundingClientRect().left;
+            Mouse._y = e.clientY - cnv.getBoundingClientRect().top;
+            Mouse._moveX = Mouse._prevX - Mouse._x;
+            Mouse._moveY = Mouse._prevY - Mouse._y;
         });
         cnv.addEventListener("pointerup", (e) => {
-            if (LunaMouse._states[e.button] === 2) {
-                LunaMouse._states[e.button] = 3;
+            if (Mouse._states[e.button] === 2) {
+                Mouse._states[e.button] = 3;
             }
 
-            LunaMouse._x = e.clientX - cnv.getBoundingClientRect().left;
-            LunaMouse._y = e.clientY - cnv.getBoundingClientRect().top;
+            Mouse._x = e.clientX - cnv.getBoundingClientRect().left;
+            Mouse._y = e.clientY - cnv.getBoundingClientRect().top;
         });
 
         cnv.addEventListener("contextmenu", (e) => {

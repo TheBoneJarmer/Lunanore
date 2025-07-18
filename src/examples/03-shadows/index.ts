@@ -2,7 +2,7 @@ import { Lunanore, LunaScene } from "../../lunanore";
 
 class SceneMain extends LunaScene {
     public async init() {
-
+        
     }
 
     public async update(dt: number) {
