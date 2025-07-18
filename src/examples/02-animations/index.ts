@@ -1,32 +1,32 @@
-import { AnimationAction, LoopOnce, LoopRepeat, MathUtils } from "three";
-import { LunaAssets, LunaModel, LunaMouse, Lunanore, LunaObject, LunaScene } from "../../lunanore/";
+import * as THREE from "three";
+import { Assets, Model, Mouse, Lunanore, Actor, Scene } from "../../lunanore/";
 
-class Mage extends LunaObject {
-    constructor(model: LunaModel) {
+class ActorMage extends Actor {
+    constructor(model: Model) {
         super("mage", model);
     }
 
     public async update(dt: number) {
-        if (LunaMouse.isButtonDown(0)) {
-            const moveX = LunaMouse.moveX;
-            const moveY = LunaMouse.moveY;
+        if (Mouse.isButtonDown(0)) {
+            const moveX = Mouse.moveX;
+            const moveY = Mouse.moveY;
 
             this.rotation.x -= moveY * 0.004;
             this.rotation.y -= moveX * 0.004;
         }
 
-        if (LunaMouse.isButtonPressed(2)) {
+        if (Mouse.isButtonPressed(2)) {
             this.rotation.set(0, 0, 0);
         }
     }
 }
 
-class SceneMain extends LunaScene {
-    private _model: LunaModel | null = null;
-    private _mage: Mage | null = null;
+class SceneMain extends Scene {
+    private _model: Model | null = null;
+    private _mage: ActorMage | null = null;
     private _loop: boolean = false;
     private _anim: string = "";
-    private _action: AnimationAction | null = null;
+    private _action: THREE.AnimationAction | null = null;
 
     public async init() {
         await super.init();
@@ -37,14 +37,14 @@ class SceneMain extends LunaScene {
     }
 
     private async initAssets() {
-        this._model = await LunaAssets.loadModel("mage.glb");
+        this._model = await Assets.loadModel("mage.glb");
     }
 
     private async initScene() {
         this.camera.position.set(0, 2, 5);
-        this.camera.rotation.set(MathUtils.DEG2RAD * -15, 0, 0);
+        this.camera.rotation.set(THREE.MathUtils.DEG2RAD * -15, 0, 0);
 
-        this._mage = new Mage(this._model!);
+        this._mage = new ActorMage(this._model!);
         this.add(this._mage);
     }
 
@@ -106,7 +106,7 @@ class SceneMain extends LunaScene {
     }
 
     private async play() {
-        const obj = this.objects.find(x => x.tag == "mage");
+        const obj = this.actors.find(x => x.tag == "mage");
         this._action = await obj!.model.play(this._anim, this._loop);
     }
 

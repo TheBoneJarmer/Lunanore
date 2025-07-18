@@ -1,6 +1,6 @@
-import { Lunanore, LunaScene } from "../../lunanore";
+import { Lunanore, Scene } from "../../lunanore";
 
-class SceneMain extends LunaScene {
+class SceneMain extends Scene {
     public async init() {
 
     }

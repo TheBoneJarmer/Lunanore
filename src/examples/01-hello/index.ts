@@ -1,13 +1,13 @@
-import { MeshPhongMaterial, WebGLRenderer } from "three";
-import { Lunanore, LunaKey, LunaKeyboard, LunaModel, LunaObject, LunaScene } from "../../lunanore";
+import * as THREE from "three";
+import { Actor, Keyboard, Keys, Lunanore, Model, Scene } from "../../lunanore";
 
-class Cube extends LunaObject {
+class ActorCube extends Actor {
     private _rotate: boolean = true;
 
     public async update(dt: number) {
         const speed = 0.2 * dt;
 
-        if (LunaKeyboard.keyPressed(LunaKey.Space)) {
+        if (Keyboard.keyPressed(Keys.Space)) {
             this._rotate = !this._rotate;
 
             console.log(`Rotation ${this._rotate ? "enabled" : "disabled"}`);
@@ -21,17 +21,17 @@ class Cube extends LunaObject {
     }
 }
 
-class SceneMain extends LunaScene {
-    private _model: LunaModel | null = null;
-    private _cube: Cube | null = null;
+class SceneMain extends Scene {
+    private _model: Model | null = null;
+    private _cube: ActorCube | null = null;
 
     public async init() {
-        const mat = new MeshPhongMaterial();
+        const mat = new THREE.MeshPhongMaterial();
         mat.color.set("#4784a7");
         mat.flatShading = true;
 
-        this._model = LunaModel.torusKnot(1, 0.4, 32, 4, 2, 3, mat);
-        this._cube = new Cube("cube", this._model);
+        this._model = Model.torusKnot(1, 0.4, 32, 4, 2, 3, mat);
+        this._cube = new ActorCube("cube", this._model);
         this.add(this._cube);
 
         this.camera.position.z = 5;
