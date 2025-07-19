@@ -128,6 +128,9 @@ export class Model {
         }
 
         const mesh = new THREE.Mesh(geom, mat);
+        mesh.receiveShadow = true;
+        mesh.castShadow = true;
+
         const model = new Model();
         model.data.add(mesh);
 
@@ -142,6 +145,9 @@ export class Model {
         }
 
         const mesh = new THREE.Mesh(geom, mat);
+        mesh.receiveShadow = true;
+        mesh.castShadow = true;
+
         const model = new Model();
         model.data.add(mesh);
 
@@ -173,6 +179,9 @@ export class Model {
         }
 
         const mesh = new THREE.Mesh(geom, mat);
+        mesh.receiveShadow = true;
+        mesh.castShadow = true;
+
         const model = new Model();
         model.data.add(mesh);
 
@@ -187,6 +196,9 @@ export class Model {
         }
 
         const mesh = new THREE.Mesh(geom, mat);
+        mesh.receiveShadow = true;
+        mesh.castShadow = true;
+
         const model = new Model();
         model.data.add(mesh);
 
@@ -201,6 +213,9 @@ export class Model {
         }
 
         const mesh = new THREE.Mesh(geom, mat);
+        mesh.receiveShadow = true;
+        mesh.castShadow = true;
+
         const model = new Model();
         model.data.add(mesh);
 
@@ -215,6 +230,9 @@ export class Model {
         }
 
         const mesh = new THREE.Mesh(geom, mat);
+        mesh.receiveShadow = true;
+        mesh.castShadow = true;
+
         const model = new Model();
         model.data.add(mesh);
 

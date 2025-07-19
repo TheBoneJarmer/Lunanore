@@ -60,22 +60,22 @@ export abstract class Scene {
     }
 
     private constructLight() {
-        const ambLight = new THREE.AmbientLight("#aaaaaa", 0.5);
+        const ambLight = new THREE.AmbientLight("#ffffff", 1.0);
 
-        const dirLight = new THREE.DirectionalLight("#ffffff", 1.0);
-        dirLight.position.set(10, 10, 10);
-        dirLight.shadow.mapSize.set(1024, 1024);
-        dirLight.castShadow = true;
+        const light = new THREE.DirectionalLight("#ffffff", 1.0);
+        light.position.set(10, 10, 10);
+        light.shadow.mapSize.set(1024, 1024);
+        light.castShadow = true;
 
-        const shadowCam = dirLight.shadow.camera as THREE.OrthographicCamera;
-        shadowCam.left = -10;
-        shadowCam.right = 10;
-        shadowCam.top = 10;
-        shadowCam.bottom = -10;
-        shadowCam.near = 0.01;
-        shadowCam.far = 1000;
+        const cam = light.shadow.camera as THREE.OrthographicCamera;
+        cam.left = -10;
+        cam.right = 10;
+        cam.top = 10;
+        cam.bottom = -10;
+        cam.near = this._camera.near;
+        cam.far = this._camera.far;
 
-        this._light = dirLight;
+        this._light = light;
         this._ambient = ambLight;
     }
 
