@@ -1,3 +1,4 @@
+import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { Model } from "./model";
 
@@ -27,10 +28,11 @@ export class Assets {
         let model: Model | null = null;
 
         if (path.endsWith(".glb") || path.endsWith(".gltf")) {
-            model = await this.loadModel_GLTF(path);
+            model = await this.importModel_GLTF(path);
         }
 
         if (model != null) {
+            await this.importModel_EnableShadows(model.data.children);
             await this.addModel(key, model);
             return;
         }
@@ -38,7 +40,23 @@ export class Assets {
         throw new Error("Unsupported model format");
     }
 
-    private static async loadModel_GLTF(path: string): Promise<Model> {
+    private static async importModel_EnableShadows(children: THREE.Object3D[]) {
+        for (let child of children) {
+            if (child instanceof THREE.Mesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+            }
+
+            if (child instanceof THREE.SkinnedMesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+            }
+
+            await this.importModel_EnableShadows(child.children);
+        }
+    }
+
+    private static async importModel_GLTF(path: string): Promise<Model> {
         const gltf = await this._gltfLoader.loadAsync(path, undefined);
 
         const model = new Model();

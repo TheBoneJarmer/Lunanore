@@ -21,8 +21,15 @@ class ActorMage extends Actor {
     }
 }
 
+class ActorFloor extends Actor {
+    constructor(model: Model) {
+        super("floor", model);
+    }
+}
+
 class SceneMain extends Scene {
     private _mage: ActorMage | null = null;
+    private _floor: ActorFloor | null = null;
     private _loop: boolean = false;
     private _anim: string = "";
     private _action: THREE.AnimationAction | null = null;
@@ -35,16 +42,18 @@ class SceneMain extends Scene {
 
     private async initAssets() {
         await Assets.importModel("mage", "mage.glb");
+        await Assets.addModel("floor", Model.box(20, 0.1, 20));
     }
 
     private async initScene() {
-        const model = Assets.getModel("mage");
-
         this.camera.position.set(0, 2, 5);
         this.camera.rotation.set(THREE.MathUtils.DEG2RAD * -15, 0, 0);
 
-        this._mage = new ActorMage(model);
+        this._mage = new ActorMage(Assets.getModel("mage"));
+        this._floor = new ActorFloor(Assets.getModel("floor"));
+
         this.add(this._mage);
+        this.add(this._floor);
     }
 
     private async initControls() {

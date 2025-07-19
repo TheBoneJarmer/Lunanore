@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { Actor, Keyboard, Lunanore, Model, Scene } from "../../lunanore";
-import { Keys } from "../../lunanore/enums/keys";
+import { Keys } from "../../lunanore/enums";
 
 class ActorCube extends Actor {
     private _rotate: boolean = true;

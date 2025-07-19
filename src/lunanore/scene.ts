@@ -41,10 +41,42 @@ export abstract class Scene {
     }
 
     constructor() {
+        this.constructScene();
+        this.constructCamera();
+        this.constructLight();
+    }
+
+    private constructScene() {
         this._scene = new THREE.Scene();
-        this._camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.01, 1000);
-        this._light = new THREE.DirectionalLight("#ffffff", 1.0);
-        this._ambient = new THREE.AmbientLight("#aaaaaa", 0.5);
+    }
+
+    private constructCamera() {
+        const fov = 60.0;
+        const aspect = innerWidth / innerHeight;
+        const near = 0.01;
+        const far = 1000.0;
+
+        this._camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    }
+
+    private constructLight() {
+        const ambLight = new THREE.AmbientLight("#aaaaaa", 0.5);
+
+        const dirLight = new THREE.DirectionalLight("#ffffff", 1.0);
+        dirLight.position.set(10, 10, 10);
+        dirLight.shadow.mapSize.set(1024, 1024);
+        dirLight.castShadow = true;
+
+        const shadowCam = dirLight.shadow.camera as THREE.OrthographicCamera;
+        shadowCam.left = -10;
+        shadowCam.right = 10;
+        shadowCam.top = 10;
+        shadowCam.bottom = -10;
+        shadowCam.near = 0.01;
+        shadowCam.far = 1000;
+
+        this._light = dirLight;
+        this._ambient = ambLight;
     }
 
     public clear() {
@@ -64,10 +96,10 @@ export abstract class Scene {
 
     /* OVERRIDES */
     public async update(dt: number) {
-        
+
     }
 
     public async init() {
-        
+
     }
 }

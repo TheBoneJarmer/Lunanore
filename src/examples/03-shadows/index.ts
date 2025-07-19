@@ -1,12 +1,36 @@
+import * as THREE from "three";
 import { Actor, Assets, Lunanore, Model, Scene } from "../../lunanore";
 
-class ActorCube extends Actor {
-    constructor(tag: string) {
-        super(tag, Assets.getModel("cube"));
+class ActorShape extends Actor {
+    private _velocity: number = 0;
+    private _angle: number = 0;
+
+    constructor(tag: string, model: Model) {
+        super(tag, model);
+
+        for (let obj of this.model.data.children) {
+            obj.castShadow = true;
+        }
     }
 
     public async update(dt: number) {
+        this._velocity += 0.01;
+        this._angle = Math.cos(this._velocity);
 
+        this.position.y += this._angle * dt;
+        this.rotation.y += dt;
+        this.rotation.x += dt;
+        this.rotation.z += dt;
+    }
+}
+
+class ActorFloor extends Actor {
+    constructor(tag: string) {
+        super(tag, Assets.getModel("floor"));
+    }
+
+    public async update(dt: number) {
+        
     }
 }
 
@@ -19,29 +43,37 @@ class SceneMain extends Scene {
 
     private async initAssets() {
         Assets.addModel("cube", Model.cube());
+        Assets.addModel("floor", Model.box(20, 0.1, 20));
+        Assets.addModel("torus", Model.torus());
+        Assets.addModel("sphere", Model.sphere());
     }
 
     private async initScene() {
-        this.camera.position.set(0, 2.5, 5);
+        this.light.position.set(20, 100, 20);
+        this.camera.position.set(0, 10, 20);
+        this.camera.rotation.set(THREE.MathUtils.DEG2RAD * -25, 0, 0);
     }
 
     private async initActors() {
-        const cube1 = new ActorCube("cube1");
-        cube1.position.set(-5, 5, 0);
+        const cube = new ActorShape("cube", Assets.getModel("cube"));
+        cube.position.set(-5, 3, 0);
 
-        const cube2 = new ActorCube("cube2");
-        cube2.position.set(0, 5, 0);
-        
-        const cube3 = new ActorCube("cube3");
-        cube3.position.set(5, 5, 0);
+        const sphere = new ActorShape("sphere", Assets.getModel("sphere"));
+        sphere.position.set(0, 3, 0);
 
-        this.add(cube1);
-        this.add(cube2);
-        this.add(cube3);
+        const torus = new ActorShape("torus", Assets.getModel("torus"));
+        torus.position.set(5, 3, 0);
+
+        const floor = new ActorFloor("floor");
+
+        this.add(cube);
+        this.add(sphere);
+        this.add(torus);
+        this.add(floor);
     }
 
     public async update(dt: number) {
-        
+
     }
 }
 

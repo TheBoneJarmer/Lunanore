@@ -107,10 +107,13 @@ export class Model {
         let geom = new THREE.BoxGeometry(size, size, size);
 
         if (mat == null) {
-            mat = new THREE.MeshBasicMaterial();
+            mat = new THREE.MeshStandardMaterial();
         }
 
         const mesh = new THREE.Mesh(geom, mat);
+        mesh.receiveShadow = true;
+        mesh.castShadow = true;
+
         const model = new Model();
         model.data.add(mesh);
 
@@ -121,7 +124,7 @@ export class Model {
         let geom = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
 
         if (mat == null) {
-            mat = new THREE.MeshBasicMaterial();
+            mat = new THREE.MeshStandardMaterial();
         }
 
         const mesh = new THREE.Mesh(geom, mat);
@@ -135,7 +138,7 @@ export class Model {
         let geom = new THREE.ConeGeometry(radius, height, radialSegments);
 
         if (mat == null) {
-            mat = new THREE.MeshBasicMaterial();
+            mat = new THREE.MeshStandardMaterial();
         }
 
         const mesh = new THREE.Mesh(geom, mat);
@@ -149,10 +152,13 @@ export class Model {
         let geom = new THREE.BoxGeometry(width, height, depth);
 
         if (mat == null) {
-            mat = new THREE.MeshBasicMaterial();
+            mat = new THREE.MeshStandardMaterial();
         }
 
         const mesh = new THREE.Mesh(geom, mat);
+        mesh.receiveShadow = true;
+        mesh.castShadow = true;
+
         const model = new Model();
         model.data.add(mesh);
 
@@ -163,7 +169,7 @@ export class Model {
         let geom = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radialSegments);
 
         if (mat == null) {
-            mat = new THREE.MeshBasicMaterial();
+            mat = new THREE.MeshStandardMaterial();
         }
 
         const mesh = new THREE.Mesh(geom, mat);
@@ -177,7 +183,7 @@ export class Model {
         let geom = new THREE.TorusGeometry(radius, tube, radialSegments, tubularSegments);
 
         if (mat == null) {
-            mat = new THREE.MeshBasicMaterial();
+            mat = new THREE.MeshStandardMaterial();
         }
 
         const mesh = new THREE.Mesh(geom, mat);
@@ -191,7 +197,7 @@ export class Model {
         let geom = new THREE.TorusKnotGeometry(radius, tube, tubularSegments, radialSegments, p, q);
 
         if (mat == null) {
-            mat = new THREE.MeshBasicMaterial();
+            mat = new THREE.MeshStandardMaterial();
         }
 
         const mesh = new THREE.Mesh(geom, mat);
@@ -205,7 +211,7 @@ export class Model {
         let geom = new THREE.PlaneGeometry(width, height, widthSegments, heightSegments);
 
         if (mat == null) {
-            mat = new THREE.MeshBasicMaterial();
+            mat = new THREE.MeshStandardMaterial();
         }
 
         const mesh = new THREE.Mesh(geom, mat);

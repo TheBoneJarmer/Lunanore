@@ -48,6 +48,8 @@ export class Lunanore {
     private static initRenderer() {
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(innerWidth, innerHeight);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFShadowMap;
 
         document.body.appendChild(renderer.domElement);
         this._renderer = renderer;
