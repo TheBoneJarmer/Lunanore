@@ -6,3 +6,6 @@ export * from "./model";
 export * from "./keyboard";
 export * from "./mouse";
 export * from "./audio";
+export * from "./scenes";
+export * from "./sound";
+export * from "./sound-instance";

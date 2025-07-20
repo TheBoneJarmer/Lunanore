@@ -4,13 +4,11 @@ import { Keyboard } from "./keyboard";
 import { Mouse } from "./mouse";
 import { LunanoreOptions } from "./structs";
 import { ShadowType } from "./enums";
+import { Scenes } from "./scenes";
 
 export class Lunanore {
     private static _deltaTime: number = 0;
     private static _lastTime: number = 0;
-    private static _scenes: Map<string, Scene> = null;
-    private static _sceneNext: string = null;
-    private static _scene: string = null;
     private static _renderer: THREE.WebGLRenderer = null;
     private static _canvas: HTMLCanvasElement = null;
     private static _options: LunanoreOptions = null;
@@ -23,16 +21,7 @@ export class Lunanore {
         return this._canvas;
     }
 
-    public static get scene(): string {
-        return this._scene;
-    }
-
-    public static set scene(value: string) {
-        this._sceneNext = value;
-    }
-
     public static init(canvas: HTMLCanvasElement, options: LunanoreOptions = new LunanoreOptions()) {
-        this._scenes = new Map();
         this._options = options;
         this._canvas = canvas;
 
@@ -73,24 +62,20 @@ export class Lunanore {
         this._renderer = renderer;
     }
 
-    public static register(name: string, scene: Scene) {
-        this._scenes.set(name, scene);
-    }
-
     public static run() {
         this.callback(0);
     }
 
-    public static resize() {
+    private static resize() {
         const width = this._canvas.clientWidth;
         const height = this._canvas.clientHeight;
+        const scene = Scenes.scene;
 
         if (this._renderer != null) {
             this._renderer.setSize(width, height);
         }
 
-        if (this._scene != null) {
-            const scene = this._scenes.get(this._scene);
+        if (scene != null) {
             const cam = scene.camera;
 
             cam.aspect = width / height;
@@ -101,6 +86,7 @@ export class Lunanore {
     private static async callback(time: number) {
         try {
             await Lunanore.update(time);
+            await Lunanore.render();
         } catch (error) {
             console.error("An error occurred during the game loop");
             console.error(error);
@@ -113,31 +99,13 @@ export class Lunanore {
         this._deltaTime = time - this._lastTime;
         this._lastTime = time;
 
-        if (this._sceneNext != null) {
-            const scene = this._scenes.get(this._sceneNext);
-
-            this._scene = this._sceneNext;
-            this._sceneNext = null;
-
-            scene.clear();
-            await scene.init();
-        }
-
-        if (this._scene != null) {
-            const dt = this._deltaTime / 1000.0;
-            const scene = this._scenes.get(this._scene);
-
-            for (let obj of scene.actors) {
-                await obj.model.update(dt);
-                await obj.update(dt);
-            }
-
-            await scene.update(dt);
-
-            this._renderer.render(scene.scene, scene.camera);
-        }
+        await Scenes.update(this._deltaTime / 1000.0);
 
         Keyboard.update();
         Mouse.update();
+    }
+
+    private static async render() {
+        await Scenes.render(this._renderer);
     }
 }

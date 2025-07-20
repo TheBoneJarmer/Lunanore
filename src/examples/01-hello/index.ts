@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { Actor, Keyboard, Lunanore, Model, Scene } from "../../lunanore";
+import { Actor, Keyboard, Lunanore, Model, Scene, Scenes } from "../../lunanore";
 import { Keys } from "../../lunanore/enums";
 
 class ActorCube extends Actor {
@@ -42,7 +42,8 @@ class SceneMain extends Scene {
 const cnv = document.querySelector("canvas")!;
 
 Lunanore.init(cnv);
-Lunanore.register("main", new SceneMain());
 
-Lunanore.scene = "main";
+Scenes.add("main", new SceneMain());
+Scenes.navigate("main");
+
 Lunanore.run();

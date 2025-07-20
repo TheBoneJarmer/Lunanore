@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { Actor, Assets, Lunanore, Model, Scene } from "../../lunanore";
+import { Scenes } from "../../lunanore/scenes";
 
 class ActorShape extends Actor {
     private _velocity: number = 0;
@@ -71,16 +72,13 @@ class SceneMain extends Scene {
         this.add(torus);
         this.add(floor);
     }
-
-    public async update(dt: number) {
-
-    }
 }
 
 const cnv = document.querySelector("canvas")!;
 
 Lunanore.init(cnv);
-Lunanore.register("main", new SceneMain());
 
-Lunanore.scene = "main";
+Scenes.add("main", new SceneMain());
+Scenes.navigate("main");
+
 Lunanore.run();

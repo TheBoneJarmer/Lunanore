@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { Assets, Model, Mouse, Lunanore, Actor, Scene } from "../../lunanore/";
+import { Assets, Model, Mouse, Lunanore, Actor, Scene, Scenes } from "../../lunanore/";
 
 class ActorMage extends Actor {
     constructor(model: Model) {
@@ -126,7 +126,8 @@ class SceneMain extends Scene {
 const cnv = document.querySelector("canvas")!;
 
 Lunanore.init(cnv);
-Lunanore.register("main", new SceneMain());
 
-Lunanore.scene = "main";
+Scenes.add("main", new SceneMain());
+Scenes.navigate("main");
+
 Lunanore.run();
