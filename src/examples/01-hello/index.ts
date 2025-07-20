@@ -1,22 +1,19 @@
 import * as THREE from "three";
-import { Actor, Keyboard, Keys, Lunanore, Model, Scene } from "../../lunanore";
+import { Actor, Keyboard, Lunanore, Model, Scene } from "../../lunanore";
+import { Keys } from "../../lunanore/enums";
 
 class ActorCube extends Actor {
     private _rotate: boolean = true;
 
     public async update(dt: number) {
-        const speed = 0.2 * dt;
+        const speed = dt;
 
         if (Keyboard.keyPressed(Keys.Space)) {
             this._rotate = !this._rotate;
-
-            console.log(`Rotation ${this._rotate ? "enabled" : "disabled"}`);
         }
 
         if (this._rotate) {
-            //this.rotation.x += speed;
             this.rotation.y += speed;
-            //this.rotation.z += speed;
         }
     }
 }
@@ -38,7 +35,7 @@ class SceneMain extends Scene {
     }
 
     public async update(dt: number) {
-        super.update(dt);
+        
     }
 }
 
@@ -46,4 +43,6 @@ const cnv = document.querySelector("canvas")!;
 
 Lunanore.init(cnv);
 Lunanore.register("main", new SceneMain());
-Lunanore.run("main");
+
+Lunanore.scene = "main";
+Lunanore.run();

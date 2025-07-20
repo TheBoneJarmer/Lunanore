@@ -109,10 +109,6 @@ class SceneMain extends Scene {
         await this.play();
     }
 
-    public async update(dt: number) {
-        await super.update(dt);
-    }
-
     private async play() {
         const obj = this.actors.find(x => x.tag == "mage");
         this._action = await obj!.model.play(this._anim, this._loop);
@@ -131,4 +127,6 @@ const cnv = document.querySelector("canvas")!;
 
 Lunanore.init(cnv);
 Lunanore.register("main", new SceneMain());
-Lunanore.run("main");
+
+Lunanore.scene = "main";
+Lunanore.run();

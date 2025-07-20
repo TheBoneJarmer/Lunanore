@@ -14,4 +14,6 @@ const cnv = document.querySelector("canvas")!;
 
 Lunanore.init(cnv);
 Lunanore.register("main", new SceneMain());
-Lunanore.run("main");
+
+Lunanore.scene = "main";
+Lunanore.run();

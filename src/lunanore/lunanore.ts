@@ -6,6 +6,8 @@ import { LunanoreOptions } from "./structs";
 import { ShadowType } from "./enums";
 
 export class Lunanore {
+    private static _deltaTime: number = 0;
+    private static _lastTime: number = 0;
     private static _scenes: Map<string, Scene> = null;
     private static _sceneNext: string = null;
     private static _scene: string = null;
@@ -61,7 +63,7 @@ export class Lunanore {
         const renderer = new THREE.WebGLRenderer(rendererParams);
         renderer.setSize(width, height);
         renderer.shadowMap.enabled = shadowOptions.enabled;
-        
+
         if (shadowOptions.type == ShadowType.HARD) {
             renderer.shadowMap.type = THREE.PCFShadowMap;
         } else {
@@ -76,8 +78,6 @@ export class Lunanore {
     }
 
     public static run() {
-        const clock = new THREE.Clock();
-
         this.callback(0);
     }
 
@@ -99,46 +99,45 @@ export class Lunanore {
     };
 
     private static async callback(time: number) {
-        const dt = this._clock.getDelta();
-
-        await Lunanore.update(dt);
-
-        Lunanore._handle = requestAnimationFrame(Lunanore.callback);
-    }
-
-    private static async update(dt: number) {
         try {
-            if (this._sceneNext != null) {
-                const scene = this._scenes.get(this._sceneNext);
-
-                this._scene = this._sceneNext;
-                this._sceneNext = null;
-
-                scene.clear();
-                await scene.init();
-            }
-
-            if (this._scene != null) {
-                const scene = this._scenes.get(this._scene);
-                
-                for (let obj of scene.actors) {
-                    await obj.model.update(dt);
-                    await obj.update(dt);
-                }
-
-                await scene.update(dt);
-
-                this._renderer.render(scene.scene, scene.camera);
-            }
-
-            Keyboard.update();
-            Mouse.update();
+            await Lunanore.update(time);
         } catch (error) {
             console.error("An error occurred during the game loop");
             console.error(error);
-
-            cancelAnimationFrame(this._handle);
-            this._handle = -1;
         }
+
+        requestAnimationFrame(Lunanore.callback);
+    }
+
+    private static async update(time: number) {
+        this._deltaTime = time - this._lastTime;
+        this._lastTime = time;
+
+        if (this._sceneNext != null) {
+            const scene = this._scenes.get(this._sceneNext);
+
+            this._scene = this._sceneNext;
+            this._sceneNext = null;
+
+            scene.clear();
+            await scene.init();
+        }
+
+        if (this._scene != null) {
+            const dt = this._deltaTime / 1000.0;
+            const scene = this._scenes.get(this._scene);
+
+            for (let obj of scene.actors) {
+                await obj.model.update(dt);
+                await obj.update(dt);
+            }
+
+            await scene.update(dt);
+
+            this._renderer.render(scene.scene, scene.camera);
+        }
+
+        Keyboard.update();
+        Mouse.update();
     }
 }
