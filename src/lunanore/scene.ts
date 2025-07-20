@@ -1,5 +1,7 @@
 import * as THREE from "three";
 import { Actor } from "./actor";
+import { Lunanore } from "./lunanore";
+import { ShadowQuality } from "./enums";
 
 export abstract class Scene {
     private _actors: Actor[] = [];
@@ -51,8 +53,11 @@ export abstract class Scene {
     }
 
     private constructCamera() {
+        const width = Lunanore.canvas.clientWidth;
+        const height = Lunanore.canvas.clientHeight;
+
         const fov = 60.0;
-        const aspect = innerWidth / innerHeight;
+        const aspect = width / height;
         const near = 0.01;
         const far = 1000.0;
 
@@ -60,23 +65,44 @@ export abstract class Scene {
     }
 
     private constructLight() {
-        const ambLight = new THREE.AmbientLight("#ffffff", 1.0);
+        const shadowOptions = Lunanore.options.graphics.shadows;
 
-        const light = new THREE.DirectionalLight("#ffffff", 1.0);
-        light.position.set(10, 10, 10);
-        light.shadow.mapSize.set(1024, 1024);
-        light.castShadow = true;
+        this._light = new THREE.DirectionalLight("#ffffff", 1.0);
+        this._light.position.set(10, 10, 10);
 
-        const cam = light.shadow.camera as THREE.OrthographicCamera;
-        cam.left = -10;
-        cam.right = 10;
-        cam.top = 10;
-        cam.bottom = -10;
-        cam.near = this._camera.near;
-        cam.far = this._camera.far;
+        if (shadowOptions.enabled) {
+            this._light.castShadow = true;
 
-        this._light = light;
-        this._ambient = ambLight;
+            if (shadowOptions.quality == ShadowQuality.LOW) {
+                this._light.shadow.mapSize.width = 512;
+                this._light.shadow.mapSize.height = 512;
+            }
+
+            if (shadowOptions.quality == ShadowQuality.MEDIUM) {
+                this._light.shadow.mapSize.width = 1024;
+                this._light.shadow.mapSize.height = 1024;
+            }
+
+            if (shadowOptions.quality == ShadowQuality.HIGH) {
+                this._light.shadow.mapSize.width = 2048;
+                this._light.shadow.mapSize.height = 2048;
+            }
+
+            if (shadowOptions.quality == ShadowQuality.ULTRA) {
+                this._light.shadow.mapSize.width = 4096;
+                this._light.shadow.mapSize.height = 4096;
+            }
+
+            const cam = this._light.shadow.camera as THREE.OrthographicCamera;
+            cam.left = -20;
+            cam.right = 20;
+            cam.top = 20;
+            cam.bottom = -20;
+            cam.near = this._camera.near;
+            cam.far = this._camera.far;
+        }
+
+        this._ambient = new THREE.AmbientLight("#ffffff", 1.0);
     }
 
     public clear() {

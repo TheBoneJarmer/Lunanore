@@ -1,5 +1,5 @@
-import { Keys } from "./enums/keys";
-import { KeyState } from "./key-state";
+import { Keys } from "./enums";
+import { KeyState } from "./structs";
 
 export class Keyboard {
     private static readonly _states: KeyState[] = [];

@@ -77,6 +77,8 @@ class SceneMain extends Scene {
     }
 }
 
-Lunanore.init();
+const cnv = document.querySelector("canvas")!;
+
+Lunanore.init(cnv);
 Lunanore.register("main", new SceneMain());
 Lunanore.run("main");

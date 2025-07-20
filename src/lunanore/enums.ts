@@ -83,4 +83,21 @@ export enum Keys {
     NumpadAdd,
     NumpadEnter,
     NumpadDecimal,
+};
+
+export enum SoundStatus {
+    STOPPED,
+    PLAYING
+};
+
+export enum ShadowType {
+    HARD,
+    SOFT
+};
+
+export enum ShadowQuality {
+    LOW,
+    MEDIUM,
+    HIGH,
+    ULTRA
 }

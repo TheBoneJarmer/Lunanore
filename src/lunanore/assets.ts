@@ -1,10 +1,13 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { Model } from "./model";
+import { Sound } from "./sound";
+import { Lunanore } from "./lunanore";
 
 export class Assets {
     private static _gltfLoader = new GLTFLoader();
     private static _models: Map<string, Model> = new Map();
+    private static _sounds: Map<string, Sound> = new Map();
 
     public static getModel(key: string): Model {
         const model = this._models.get(key);
@@ -32,12 +35,19 @@ export class Assets {
         }
 
         if (model != null) {
-            await this.importModel_EnableShadows(model.data.children);
+            if (Lunanore.options.graphics.shadows.enabled) {
+                await this.importModel_EnableShadows(model.data.children);
+            }
+
             await this.addModel(key, model);
             return;
         }
 
         throw new Error("Unsupported model format");
+    }
+
+    public static async importSound(key: string, path: string) {
+        this._sounds.set(key, new Sound(path));
     }
 
     private static async importModel_EnableShadows(children: THREE.Object3D[]) {
