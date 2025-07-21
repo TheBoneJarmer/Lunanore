@@ -25,7 +25,7 @@ npm install --save lunanore
 
 ## Examples
 
-I highly recommend looking at the example folder. That way you get some idea of how to use Lunanore. When the framework is stable enough I will provide some documentation too.
+I highly recommend looking at the [example folder](./src/examples/). That way you get some idea of how to use Lunanore. When the framework is stable enough I will provide some documentation too.
 
 ## Contribution
 
@@ -33,4 +33,4 @@ Right now I have pull requests locked because I am still working on the beta ver
 
 ## License
 
-[MIT](./ LICENSE)
+[MIT](./LICENSE)
