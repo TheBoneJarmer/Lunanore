@@ -5,6 +5,7 @@ import { Mouse } from "./mouse";
 import { LunanoreOptions } from "./structs";
 import { ShadowType } from "./enums";
 import { Scenes } from "./scenes";
+import { Joystick } from "./joystick";
 
 export class Lunanore {
     private static _deltaTime: number = 0;
@@ -33,6 +34,7 @@ export class Lunanore {
     private static initInput() {
         Keyboard.init();
         Mouse.init();
+        Joystick.init();
     }
 
     private static initEventListeners() {
@@ -67,8 +69,8 @@ export class Lunanore {
     }
 
     private static resize() {
-        const width = this._canvas.clientWidth;
-        const height = this._canvas.clientHeight;
+        const width = this._canvas?.clientWidth;
+        const height = this._canvas?.clientHeight;
         const scene = Scenes.scene;
 
         if (this._renderer != null) {
@@ -87,12 +89,12 @@ export class Lunanore {
         try {
             await Lunanore.update(time);
             await Lunanore.render();
+
+            requestAnimationFrame(Lunanore.callback);
         } catch (error) {
             console.error("An error occurred during the game loop");
             console.error(error);
         }
-
-        requestAnimationFrame(Lunanore.callback);
     }
 
     private static async update(time: number) {
@@ -103,6 +105,7 @@ export class Lunanore {
 
         Keyboard.update();
         Mouse.update();
+        Joystick.update();
     }
 
     private static async render() {

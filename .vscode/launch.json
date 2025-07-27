@@ -30,6 +30,15 @@
             "cwd": "${workspaceFolder}/src/examples/03-shadows",
             "internalConsoleOptions": "neverOpen",
             "args": []
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "04 - Joystick",
+            "runtimeExecutable": "vite",
+            "cwd": "${workspaceFolder}/src/examples/04-joystick",
+            "internalConsoleOptions": "neverOpen",
+            "args": []
         }
     ]
 }
