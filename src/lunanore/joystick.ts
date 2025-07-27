@@ -35,7 +35,7 @@ export class Joystick {
 
     public static getAxes(jid: number): number[] {
         const gamepad = this.getGamepad(jid);
-        return gamepad.axes.map(x => x);
+        return gamepad.axes.map(x => Math.round(x));
     }
 
     public static isConnected(jid: number): boolean {
