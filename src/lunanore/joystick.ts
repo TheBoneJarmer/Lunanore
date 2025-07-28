@@ -28,14 +28,14 @@ export class Joystick {
         return gamepad;
     }
 
-    public static getButtons(jid: number): number[] {
+    public static getButtons(jid: number): boolean[] {
         const gamepad = this.getGamepad(jid);
-        return gamepad.buttons.map(x => x.value);
+        return gamepad.buttons.map(x => x.value == 1);
     }
 
     public static getAxes(jid: number): number[] {
         const gamepad = this.getGamepad(jid);
-        return gamepad.axes.map(x => Math.round(x));
+        return gamepad.axes.map(x => Math.round(x * 1000) / 1000);
     }
 
     public static isConnected(jid: number): boolean {
