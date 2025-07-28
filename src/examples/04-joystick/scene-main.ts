@@ -42,7 +42,7 @@ export class SceneMain extends Scene {
         const buttons = Joystick.getButtons(0);
         const axes = Joystick.getAxes(0);
 
-        for (let i=0; i<buttons.length; i++) {
+        for (let i = 0; i < buttons.length; i++) {
             const value1 = buttons[i];
             const value2 = this._buttons[i];
 
@@ -51,7 +51,7 @@ export class SceneMain extends Scene {
             }
         }
 
-        for (let i=0; i<axes.length; i++) {
+        for (let i = 0; i < axes.length; i++) {
             const value1 = axes[i];
             const value2 = this._axes[i];
 
@@ -62,7 +62,58 @@ export class SceneMain extends Scene {
 
         // Prevent constant re-rendering of the DOM elements
         if (refresh) {
-            
+            const div = document.getElementById("info") as HTMLDivElement;
+            div.innerHTML = "";
+            div.className = "";
+
+            const h2 = document.createElement("h2");
+            h2.innerHTML = Joystick.getName(0);
+
+            const row = document.createElement("div");
+            row.className = "row";
+
+            const col1 = document.createElement("div");
+            col1.className = "col";
+
+            const col2 = document.createElement("div");
+            col2.className = "col";
+
+            const table1 = document.createElement("table");
+            const table2 = document.createElement("table");
+
+            for (let i = 0; i < buttons.length; i++) {
+                const tr = document.createElement("tr");
+                const td1 = document.createElement("td");
+                td1.innerHTML = `Button${i}`;
+
+                const td2 = document.createElement("td");
+                td2.innerHTML = `${buttons[i] ? "PRESSED" : "IDLE"}`;
+
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                table1.appendChild(tr);
+            }
+
+            for (let i = 0; i < axes.length; i++) {
+                const tr = document.createElement("tr");
+                const td1 = document.createElement("td");
+                td1.innerHTML = `Axis${i}`;
+
+                const td2 = document.createElement("td");
+                td2.innerHTML = `${axes[i]}`;
+
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                table2.appendChild(tr);
+            }
+
+            col1.appendChild(table1);
+            col2.appendChild(table2);
+            row.appendChild(col1);
+            row.appendChild(col2);
+
+            div.appendChild(h2);
+            div.appendChild(row);
 
             // Update the state as last
             this._buttons = buttons;

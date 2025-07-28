@@ -73,6 +73,11 @@ export class Joystick {
         return gamepad.axes[axis];
     }
 
+    public static getName(jid: number): string {
+        const gamepad = this.getGamepad(jid);
+        return gamepad.id;
+    }
+
     /* CALLBACKS */
     private static onConnect(e: GamepadEvent) {
         const gamepad = e.gamepad;
