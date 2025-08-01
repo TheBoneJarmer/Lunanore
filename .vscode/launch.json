@@ -43,9 +43,18 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "05 - Raycasting",
+            "name": "05 - LSD",
             "runtimeExecutable": "vite",
-            "cwd": "${workspaceFolder}/src/examples/05-raycasting",
+            "cwd": "${workspaceFolder}/src/examples/05-lsd",
+            "internalConsoleOptions": "neverOpen",
+            "args": []
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "06 - Raycast",
+            "runtimeExecutable": "vite",
+            "cwd": "${workspaceFolder}/src/examples/06-raycast",
             "internalConsoleOptions": "neverOpen",
             "args": []
         }
