@@ -14,6 +14,7 @@ export class Spinner extends Actor {
         super("spinner", Assets.getModel("spinner"));
 
         this.rotation.x = 90;
+        this._reverse = Math.random() * 100 > 50;
     }
 
     public async update(dt: number) {
@@ -25,7 +26,7 @@ export class Spinner extends Actor {
         const max = 100 * dt;
         const speed = dt * 0.01;
 
-        this.rotation.x += this._velocity;
+        //this.rotation.x += this._velocity;
         this.rotation.y += this._velocity;
 
         if (this._reverse) {
@@ -45,7 +46,7 @@ export class Spinner extends Actor {
 
 
     private async updateColor(dt: number) {
-        const speed = dt * 4;
+        const speed = dt;
 
         if (this._step == 0) {
             if (this._r > 0) {

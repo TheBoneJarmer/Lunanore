@@ -14,8 +14,8 @@ export class SceneMain extends Scene {
         for (let x = 0; x < 10; x++) {
             for (let y = 0; y < 10; y++) {
                 const spinner = new Spinner();
-                spinner.position.x = -20 + x * 5;
-                spinner.position.y = -20 + y * 5;
+                spinner.position.x = -30 + x * 6;
+                spinner.position.y = -30 + y * 6;
 
                 this.add(spinner);
             }
@@ -29,7 +29,7 @@ export class SceneMain extends Scene {
     }
 
     private async updateColor(dt: number) {
-        const speed = dt * 4;
+        const speed = dt * 0.1;
 
         if (this._step == 0) {
             if (this._r > 0) {
