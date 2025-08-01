@@ -39,6 +39,15 @@
             "cwd": "${workspaceFolder}/src/examples/04-joystick",
             "internalConsoleOptions": "neverOpen",
             "args": []
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "05 - Raycasting",
+            "runtimeExecutable": "vite",
+            "cwd": "${workspaceFolder}/src/examples/05-raycasting",
+            "internalConsoleOptions": "neverOpen",
+            "args": []
         }
     ]
 }

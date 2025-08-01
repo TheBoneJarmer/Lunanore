@@ -123,11 +123,17 @@ class SceneMain extends Scene {
     }
 }
 
-const cnv = document.querySelector("canvas")!;
+window.addEventListener("load", () => {
+    const cnv = document.querySelector("canvas")!;
 
-Lunanore.init(cnv);
+    Lunanore.init(cnv);
 
-Scenes.add("main", new SceneMain());
-Scenes.navigate("main");
+    Scenes.add("main", new SceneMain());
+    Scenes.navigate("main");
 
-Lunanore.run();
+    Lunanore.run();
+});
+
+window.addEventListener("resize", () => {
+    Lunanore.resize(innerWidth, innerHeight);
+});

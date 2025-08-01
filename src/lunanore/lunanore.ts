@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import { Scene } from "./scene";
 import { Keyboard } from "./keyboard";
 import { Mouse } from "./mouse";
 import { LunanoreOptions } from "./structs";
@@ -38,7 +37,7 @@ export class Lunanore {
     }
 
     private static initEventListeners() {
-        window.addEventListener("resize", this.resize);
+        
     }
 
     private static initRenderer() {
@@ -68,9 +67,7 @@ export class Lunanore {
         this.callback(0);
     }
 
-    private static resize() {
-        const width = this._canvas?.clientWidth;
-        const height = this._canvas?.clientHeight;
+    public static resize(width: number, height: number) {
         const scene = Scenes.scene;
 
         if (this._renderer != null) {
