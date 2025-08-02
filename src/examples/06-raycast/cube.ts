@@ -1,4 +1,4 @@
-import { Actor, Assets } from "../../lunanore";
+import { Actor, Assets, Mouse } from "../../lunanore";
 
 export class Cube extends Actor {
     constructor() {
@@ -6,6 +6,14 @@ export class Cube extends Actor {
     }
 
     public async update(dt: number) {
-        
+        if (Mouse.isButtonDown(0)) {
+            const intersect = Mouse.intersect(this);
+
+            if (intersect == null) {
+                return
+            }
+
+            this.position.set(intersect.x, intersect.y, 0);
+        }
     }
 }

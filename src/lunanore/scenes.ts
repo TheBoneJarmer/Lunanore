@@ -47,7 +47,9 @@ export class Scenes {
             const scene = this._scenes.get(this._scene);
 
             for (let obj of scene.actors) {
-                await obj.model.update(dt);
+                const model = obj.model;
+
+                await model.update(dt);
                 await obj.update(dt);
             }
 

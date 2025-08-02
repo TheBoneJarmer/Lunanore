@@ -1,6 +1,10 @@
+import * as THREE from "three";
 import { Lunanore } from "./lunanore";
+import { Scenes } from "./scenes";
+import { Actor } from "./actor";
 
 export class Mouse {
+    private static _raycaster: THREE.Raycaster = null;
     private static _states: number[] = [];
     private static _x: number = 0;
     private static _y: number = 0;
@@ -34,19 +38,21 @@ export class Mouse {
     }
 
     public static init() {
+        this._raycaster = new THREE.Raycaster();
+
         this.initStates();
         this.initListeners();
     }
 
     private static initStates() {
-        for (let i=0; i<10; i++) {
+        for (let i = 0; i < 10; i++) {
             this._states[i] = 0;
         }
     }
 
     private static initListeners() {
         const cnv = Lunanore.canvas;
-    
+
         cnv.addEventListener("pointerdown", (e) => {
             Mouse._states[e.button] = 1;
             Mouse._x = e.clientX - cnv.getBoundingClientRect().left;
@@ -78,7 +84,7 @@ export class Mouse {
         this._moveX = 0;
         this._moveY = 0;
 
-        for (let i=0; i<this._states.length; i++) {
+        for (let i = 0; i < this._states.length; i++) {
             const state = this._states[i];
 
             if (state === 1) {
@@ -88,6 +94,14 @@ export class Mouse {
             if (state === 3) {
                 this._states[i] = 0;
             }
+        }
+
+        if (Scenes.scene != null) {
+            const point = new THREE.Vector2();
+            point.x = (Mouse.x / innerWidth) * 2 - 1;
+            point.y = -(Mouse.y / innerHeight) * 2 + 1;
+
+            this._raycaster.setFromCamera(point, Scenes.scene.camera);
         }
     }
 
@@ -101,5 +115,16 @@ export class Mouse {
 
     public static isButtonPressed(button: number): boolean {
         return this._states[button] == 1;
+    }
+
+    public static intersect(actor: Actor): THREE.Vector3 {
+        const objects = actor.model.data.children;
+        const intersections = this._raycaster.intersectObjects(objects);
+
+        if (intersections.length > 0) {
+            return intersections[0].point;
+        }
+
+        return null;
     }
 }
