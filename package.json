@@ -1,6 +1,6 @@
 {
   "name": "lunanore",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Lunanore is a 3D game framework built on top of ThreeJS",
   "keywords": [
     "three",
