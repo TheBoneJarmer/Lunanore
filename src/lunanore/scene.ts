@@ -56,7 +56,7 @@ export abstract class Scene {
         const width = Lunanore.canvas.clientWidth;
         const height = Lunanore.canvas.clientHeight;
 
-        const fov = 60.0;
+        const fov = 45.0;
         const aspect = width / height;
         const near = 0.01;
         const far = 1000.0;
@@ -114,10 +114,18 @@ export abstract class Scene {
 
     public add(actor: Actor) {
         this._actors.push(actor);
+        this._scene.add(actor.model.data);
+    }
 
-        if (actor.model != null) {
-            this._scene.add(actor.model.data);
+    public remove(actor: Actor) {
+        const index = this._actors.indexOf(actor);
+
+        if (index == -1) {
+            return;
         }
+
+        this._actors.splice(index, 1);
+        this._scene.remove(actor.model.data);
     }
 
     /* OVERRIDES */

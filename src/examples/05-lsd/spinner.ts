@@ -11,7 +11,7 @@ export class Spinner extends Actor {
     private _step: number = 0;
 
     constructor() {
-        super("spinner", Assets.getModel("spinner"));
+        super("spinner", Assets.getModel("spinner").clone());
 
         this.rotation.x = 90;
         this._reverse = Math.random() * 100 > 50;

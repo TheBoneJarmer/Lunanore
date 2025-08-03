@@ -54,25 +54,25 @@ export class Mouse {
         const cnv = Lunanore.canvas;
 
         cnv.addEventListener("pointerdown", (e) => {
-            Mouse._states[e.button] = 1;
-            Mouse._x = e.clientX - cnv.getBoundingClientRect().left;
-            Mouse._y = e.clientY - cnv.getBoundingClientRect().top;
+            this._states[e.button] = 1;
+            this._x = e.clientX - cnv.getBoundingClientRect().left;
+            this._y = e.clientY - cnv.getBoundingClientRect().top;
         });
         cnv.addEventListener("pointermove", (e) => {
-            Mouse._prevX = Mouse._x;
-            Mouse._prevY = Mouse._y;
-            Mouse._x = e.clientX - cnv.getBoundingClientRect().left;
-            Mouse._y = e.clientY - cnv.getBoundingClientRect().top;
-            Mouse._moveX = Mouse._prevX - Mouse._x;
-            Mouse._moveY = Mouse._prevY - Mouse._y;
+            this._prevX = this._x;
+            this._prevY = this._y;
+            this._x = e.clientX - cnv.getBoundingClientRect().left;
+            this._y = e.clientY - cnv.getBoundingClientRect().top;
+            this._moveX = this._prevX - this._x;
+            this._moveY = this._prevY - this._y;
         });
         cnv.addEventListener("pointerup", (e) => {
-            if (Mouse._states[e.button] === 2) {
-                Mouse._states[e.button] = 3;
+            if (this._states[e.button] === 2) {
+                this._states[e.button] = 3;
             }
 
-            Mouse._x = e.clientX - cnv.getBoundingClientRect().left;
-            Mouse._y = e.clientY - cnv.getBoundingClientRect().top;
+            this._x = e.clientX - cnv.getBoundingClientRect().left;
+            this._y = e.clientY - cnv.getBoundingClientRect().top;
         });
 
         cnv.addEventListener("contextmenu", (e) => {
@@ -98,8 +98,8 @@ export class Mouse {
 
         if (Scenes.scene != null) {
             const point = new THREE.Vector2();
-            point.x = (Mouse.x / innerWidth) * 2 - 1;
-            point.y = -(Mouse.y / innerHeight) * 2 + 1;
+            point.x = (this.x / innerWidth) * 2 - 1;
+            point.y = -(this.y / innerHeight) * 2 + 1;
 
             this._raycaster.setFromCamera(point, Scenes.scene.camera);
         }

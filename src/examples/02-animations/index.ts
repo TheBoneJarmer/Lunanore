@@ -2,7 +2,9 @@ import * as THREE from "three";
 import { Assets, Model, Mouse, Lunanore, Actor, Scene, Scenes } from "../../lunanore/";
 
 class ActorMage extends Actor {
-    constructor(model: Model) {
+    constructor() {
+        const model = Assets.getModel("mage");
+
         super("mage", model);
     }
 
@@ -22,7 +24,9 @@ class ActorMage extends Actor {
 }
 
 class ActorFloor extends Actor {
-    constructor(model: Model) {
+    constructor() {
+        const model = Assets.getModel("floor");
+
         super("floor", model);
     }
 }
@@ -49,8 +53,8 @@ class SceneMain extends Scene {
         this.camera.position.set(0, 2, 5);
         this.camera.rotation.set(THREE.MathUtils.DEG2RAD * -15, 0, 0);
 
-        this._mage = new ActorMage(Assets.getModel("mage"));
-        this._floor = new ActorFloor(Assets.getModel("floor"));
+        this._mage = new ActorMage();
+        this._floor = new ActorFloor();
 
         this.add(this._mage);
         this.add(this._floor);

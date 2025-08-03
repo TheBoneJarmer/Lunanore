@@ -20,10 +20,6 @@ export abstract class Actor {
         return this._model;
     }
 
-    public set model(value: Model) {
-        this._model = value.clone();
-    }
-
     public get position(): THREE.Vector3 {
         return this._model.position;
     }
@@ -38,7 +34,7 @@ export abstract class Actor {
 
     constructor(tag: string, model: Model) {
         this._tag = tag;
-        this._model = model.clone();
+        this._model = model;
         this._id = Actor._count;
         Actor._count++;
     }

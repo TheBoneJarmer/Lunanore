@@ -25,19 +25,18 @@ export class Lunanore {
         this._options = options;
         this._canvas = canvas;
 
+        // Set the css touch-action to none to prevent the mobile os from thinking that dragging means panning
+        // Otherwise swiping wont work at all
+        canvas.style.touchAction = "none";
+
         this.initRenderer();
         this.initInput();
-        this.initEventListeners();
     }
 
     private static initInput() {
         Keyboard.init();
         Mouse.init();
         Joystick.init();
-    }
-
-    private static initEventListeners() {
-        
     }
 
     private static initRenderer() {

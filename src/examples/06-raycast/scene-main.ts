@@ -1,4 +1,3 @@
-import * as THREE from "three";
 import { Assets, Model, Mouse, Scene } from "../../lunanore";
 import { Cube } from "./cube";
 
@@ -8,8 +7,8 @@ export class SceneMain extends Scene {
 
         for (let i = 0; i < 10; i++) {
             const cube = new Cube();
-            cube.position.x = -8 + Math.random() * 16;
-            cube.position.y = -5 + Math.random() * 10;
+            cube.position.x = -6 + Math.random() * 12;
+            cube.position.y = -4 + Math.random() * 8;
 
             this.add(cube);
         }
@@ -18,6 +17,6 @@ export class SceneMain extends Scene {
     }
 
     public async update(dt: number) {
-        
+
     }
 }
