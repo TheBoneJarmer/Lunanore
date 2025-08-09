@@ -9,3 +9,4 @@ export * from "./audio";
 export * from "./scenes";
 export * from "./sound";
 export * from "./sound-instance";
+export * from "./joystick";
