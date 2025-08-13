@@ -184,6 +184,13 @@ export class Model {
     }
 
     /* STATIC FUNCTIONS */
+
+    /**
+     * Generates a model with a single mesh and no animations. If no matarial is specified the mesh will use a MeshStandardMaterial with default values.
+     * @param size The size of the cube. Default is 1.
+     * @param mat The material used by the mesh.
+     * @returns A model
+     */
     public static cube(size: number = 1, mat: THREE.Material = null): Model {
         let geom = new THREE.BoxGeometry(size, size, size);
 
@@ -202,6 +209,14 @@ export class Model {
         return model;
     }
 
+    /**
+     * 
+     * @param radius 
+     * @param widthSegments 
+     * @param heightSegments 
+     * @param mat 
+     * @returns 
+     */
     public static sphere(radius: number = 1, widthSegments: number = 16, heightSegments: number = 12, mat: THREE.Material = null): Model {
         let geom = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
 
