@@ -184,12 +184,12 @@ export class Model {
     }
 
     /* STATIC FUNCTIONS */
-
     /**
-     * Generates a model with a single mesh and no animations. If no matarial is specified the mesh will use a MeshStandardMaterial with default values.
+     * Generates a cube model with a single mesh and no animations.
+     * If no material is specified, the mesh will use a MeshStandardMaterial with default values.
      * @param size The size of the cube. Default is 1.
      * @param mat The material used by the mesh.
-     * @returns A model
+     * @returns A new cube Model instance.
      */
     public static cube(size: number = 1, mat: THREE.Material = null): Model {
         let geom = new THREE.BoxGeometry(size, size, size);
@@ -210,12 +210,13 @@ export class Model {
     }
 
     /**
-     * 
-     * @param radius 
-     * @param widthSegments 
-     * @param heightSegments 
-     * @param mat 
-     * @returns 
+     * Generates a sphere model with a single mesh and no animations.
+     * If no material is specified, the mesh will use a MeshStandardMaterial with default values.
+     * @param radius The radius of the sphere. Default is 1.
+     * @param widthSegments The number of horizontal segments. Default is 16.
+     * @param heightSegments The number of vertical segments. Default is 12.
+     * @param mat The material used by the mesh.
+     * @returns A new sphere Model instance.
      */
     public static sphere(radius: number = 1, widthSegments: number = 16, heightSegments: number = 12, mat: THREE.Material = null): Model {
         let geom = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
@@ -235,6 +236,15 @@ export class Model {
         return model;
     }
 
+    /**
+     * Generates a cone model with a single mesh and no animations.
+     * If no material is specified, the mesh will use a MeshStandardMaterial with default values.
+     * @param radius The radius of the cone base. Default is 1.
+     * @param height The height of the cone. Default is 2.
+     * @param radialSegments The number of radial segments. Default is 16.
+     * @param mat The material used by the mesh.
+     * @returns A new cone Model instance.
+     */
     public static cone(radius: number = 1, height: number = 2, radialSegments: number = 16, mat: THREE.Material = null): Model {
         let geom = new THREE.ConeGeometry(radius, height, radialSegments);
 
@@ -253,6 +263,15 @@ export class Model {
         return model;
     }
 
+    /**
+     * Generates a box model with a single mesh and no animations.
+     * If no material is specified, the mesh will use a MeshStandardMaterial with default values.
+     * @param width The width of the box. Default is 1.
+     * @param height The height of the box. Default is 1.
+     * @param depth The depth of the box. Default is 1.
+     * @param mat The material used by the mesh.
+     * @returns A new box Model instance.
+     */
     public static box(width: number = 1, height: number = 1, depth: number = 1, mat: THREE.Material = null): Model {
         let geom = new THREE.BoxGeometry(width, height, depth);
 
@@ -271,6 +290,16 @@ export class Model {
         return model;
     }
 
+    /**
+     * Generates a cylinder model with a single mesh and no animations.
+     * If no material is specified, the mesh will use a MeshStandardMaterial with default values.
+     * @param radiusTop The radius of the cylinder at the top. Default is 1.
+     * @param radiusBottom The radius of the cylinder at the bottom. Default is 1.
+     * @param height The height of the cylinder. Default is 2.
+     * @param radialSegments The number of radial segments. Default is 16.
+     * @param mat The material used by the mesh.
+     * @returns A new cylinder Model instance.
+     */
     public static cylinder(radiusTop: number = 1, radiusBottom: number = 1, height: number = 2, radialSegments: number = 16, mat: THREE.Material = null): Model {
         let geom = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radialSegments);
 
@@ -289,6 +318,16 @@ export class Model {
         return model;
     }
 
+    /**
+     * Generates a torus model with a single mesh and no animations.
+     * If no material is specified, the mesh will use a MeshStandardMaterial with default values.
+     * @param radius The radius from the center of the torus to the center of the tube. Default is 1.
+     * @param tube The radius of the tube. Default is 0.4.
+     * @param radialSegments The number of radial segments. Default is 16.
+     * @param tubularSegments The number of tubular segments. Default is 100.
+     * @param mat The material used by the mesh.
+     * @returns A new torus Model instance.
+     */
     public static torus(radius: number = 1, tube: number = 0.4, radialSegments: number = 16, tubularSegments: number = 100, mat: THREE.Material = null): Model {
         let geom = new THREE.TorusGeometry(radius, tube, radialSegments, tubularSegments);
 
@@ -307,6 +346,18 @@ export class Model {
         return model;
     }
 
+    /**
+     * Generates a torus knot model with a single mesh and no animations.
+     * If no material is specified, the mesh will use a MeshStandardMaterial with default values.
+     * @param radius The radius from the center of the torus knot to the center of the tube. Default is 1.
+     * @param tube The radius of the tube. Default is 0.4.
+     * @param tubularSegment The number of tubular segments. Default is 100.
+     * @param radialSegments The number of radial segments. Default is 16.
+     * @param p The number of times the geometry winds around its axis of rotational symmetry. Default is 2.
+     * @param q The number of times the geometry winds around a circle in the interior of the torus. Default is 3.
+     * @param mat The material used by the mesh.
+     * @returns A new torus knot Model instance.
+     */
     public static torusKnot(radius: number = 1, tube: number = 0.4, tubularSegments: number = 100, radialSegments: number = 16, p: number = 2, q: number = 3, mat: THREE.Material = null): Model {
         let geom = new THREE.TorusKnotGeometry(radius, tube, tubularSegments, radialSegments, p, q);
 
@@ -325,6 +376,16 @@ export class Model {
         return model;
     }
 
+    /**
+     * Generates a plane model with a single mesh and no animations.
+     * If no material is specified, the mesh will use a MeshStandardMaterial with default values.
+     * @param width The width of the plane. Default is 1.
+     * @param height The height of the plane. Default is 1.
+     * @param widthSegments The number of width segments. Default is 1.
+     * @param heightSegments The number of height segments. Default is 1.
+     * @param mat The material used by the mesh.
+     * @returns A new plane Model instance.
+     */
     public static plane(width: number = 1, height: number = 1, widthSegments: number = 1, heightSegments: number = 1, mat: THREE.Material = null): Model {
         let geom = new THREE.PlaneGeometry(width, height, widthSegments, heightSegments);
 
