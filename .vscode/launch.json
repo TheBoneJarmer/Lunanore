@@ -57,6 +57,15 @@
             "cwd": "${workspaceFolder}/src/examples/06-raycast",
             "internalConsoleOptions": "neverOpen",
             "args": []
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "07 - Materials",
+            "runtimeExecutable": "vite",
+            "cwd": "${workspaceFolder}/src/examples/07-materials",
+            "internalConsoleOptions": "neverOpen",
+            "args": []
         }
     ]
 }
