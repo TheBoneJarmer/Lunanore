@@ -1,6 +1,6 @@
 {
   "name": "lunanore",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "Lunanore is a 3D game framework built on top of ThreeJS",
   "keywords": [
     "three",
@@ -18,14 +18,12 @@
   },
   "license": "ISC",
   "author": "Ruben Labruyere",
-  "types": "index.d.ts",
+  "type": "module",
   "main": "index.js",
   "devDependencies": {
-    "typescript": "^5.8.3",
     "vite": "^7.0.4"
   },
   "dependencies": {
-    "@types/three": "^0.178.1",
     "three": "^0.178.0"
   }
 }
