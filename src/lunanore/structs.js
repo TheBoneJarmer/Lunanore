@@ -1,4 +1,4 @@
-import { Keys, ShadowQuality, ShadowType } from "./enums";
+import { ShadowQuality, ShadowType } from "./enums";
 
 export class KeyState {
     code = "";
