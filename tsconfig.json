@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "outDir": "dist",
+    "allowJs": true,
     "strict": true,
     "strictNullChecks": false,
     "skipLibCheck": true,
