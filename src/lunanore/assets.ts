@@ -1,15 +1,17 @@
-import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { Mesh, Object3D, SkinnedMesh, SRGBColorSpace, Texture, TextureLoader } from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+
 import { Model } from "./model";
 import { Sound } from "./sound";
 import { Lunanore } from "./lunanore";
 
 export class Assets {
     private static _gltfLoader: GLTFLoader = new GLTFLoader();
-    private static _texLoader: THREE.TextureLoader = new THREE.TextureLoader();
+    private static _texLoader: TextureLoader = new TextureLoader();
+
     private static _models: Map<string, Model> = new Map();
     private static _sounds: Map<string, Sound> = new Map();
-    private static _textures: Map<string, THREE.Texture> = new Map();
+    private static _textures: Map<string, Texture> = new Map();
 
     public static getModel(key: string): Model {
         const model = this._models.get(key);
@@ -31,7 +33,7 @@ export class Assets {
         return sound;
     }
 
-    public static getTexture(key: string): THREE.Texture {
+    public static getTexture(key: string): Texture {
         const sound = this._textures.get(key);
 
         if (!sound) {
@@ -56,9 +58,9 @@ export class Assets {
         return sound;
     }
 
-    public static async importTexture(key: string, path: string): Promise<THREE.Texture> {
+    public static async importTexture(key: string, path: string): Promise<Texture> {
         const tex = await this._texLoader.loadAsync(path);
-        tex.colorSpace = THREE.SRGBColorSpace;
+        tex.colorSpace = SRGBColorSpace;
 
         this._textures.set(key, tex);
         return tex;
@@ -83,14 +85,14 @@ export class Assets {
         throw new Error("Unsupported model format");
     }
 
-    private static async importModel_EnableShadows(children: THREE.Object3D[]) {
+    private static async importModel_EnableShadows(children: Object3D[]) {
         for (let child of children) {
-            if (child instanceof THREE.Mesh) {
+            if (child instanceof Mesh) {
                 child.castShadow = true;
                 child.receiveShadow = true;
             }
 
-            if (child instanceof THREE.SkinnedMesh) {
+            if (child instanceof SkinnedMesh) {
                 child.castShadow = true;
                 child.receiveShadow = true;
             }
