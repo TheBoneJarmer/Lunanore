@@ -1,11 +1,13 @@
 import * as THREE from "three";
-import { Assets, Model, Scene } from "../../lunanore";
+import { Assets, Keyboard, Model, Scene } from "../../lunanore";
 import { ActorCube } from "./actor-cube";
 import { Physics } from "./physics";
 import { ActorFloor } from "./actor-floor";
+import { Keys } from "../../lunanore/enums";
 
 export class SceneMain extends Scene {
     private _timer: number = 0;
+    private _pause: boolean = false;
 
     public async init() {
         const matFloor = new THREE.MeshStandardMaterial();
@@ -14,7 +16,7 @@ export class SceneMain extends Scene {
         const matCube = new THREE.MeshStandardMaterial();
         matCube.color = new THREE.Color(0.2, 0, 0.8);
 
-        Assets.addModel("floor", Model.box(20, 0.1, 20, matFloor));
+        Assets.addModel("floor", Model.box(20, 1, 20, matFloor));
         Assets.addModel("cube", Model.cube(1, matCube));
 
         await Physics.init();
@@ -37,11 +39,24 @@ export class SceneMain extends Scene {
         const cubes = this.actors.filter(x => x.tag == "cube");
 
         const el = document.getElementById("counter");
-        el!.innerHTML = "Cubes: " + cubes.length;
+        
+        if (this._pause) {
+            el!.innerHTML = "Cubes: " + cubes.length + " [PAUSED]";
+        } else {
+            el!.innerHTML = "Cubes: " + cubes.length;
+        }
     }
 
     private async updateCubes(dt: number) {
         const cubes = this.actors.filter(x => x.tag == "cube");
+
+        if (Keyboard.keyPressed(Keys.Space)) {
+            this._pause = !this._pause;
+        }
+
+        if (this._pause) {
+            return;
+        }
 
         if (this._timer < 4) {
             this._timer++;
