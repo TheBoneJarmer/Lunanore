@@ -1,25 +1,19 @@
-import * as RAPIER from "@dimforge/rapier3d-compat";
 import { Actor, Assets } from "../../lunanore"
+import { RigidBody, RigidBodyType } from "./rigidbody";
+import { Collider } from "./collider";
 
 export class ActorFloor extends Actor {
-    private _body: RAPIER.RigidBody;
-    private _collider: RAPIER.Collider;
+    private _body: RigidBody;
+    private _collider: Collider;
 
-    constructor(world: RAPIER.World) {
+    constructor() {
         super("floor", Assets.getModel("floor"));
 
-        let bodyDesc = RAPIER.RigidBodyDesc.fixed();
-        this._body = world.createRigidBody(bodyDesc);        
-
-        let colliderDesc = RAPIER.ColliderDesc.cuboid(10, 0.1, 10);
-        this._collider = world.createCollider(colliderDesc, this._body);
+        this._body = new RigidBody(RigidBodyType.STATIC);
+        this._collider = Collider.box(20, 0.1, 20, this._body);
     }
 
     public async update(dt: number) {
-        const pos = this._body.translation();
-
-        this.position.x = pos.x;
-        this.position.y = pos.y;
-        this.position.z = pos.z;
+        this.position.copy(this._body.position);
     }
 }

@@ -6,11 +6,10 @@ window.addEventListener("load", () => {
     const cnv = document.querySelector("canvas")!;
 
     Lunanore.init(cnv);
+    Lunanore.run();
 
     Scenes.add("main", new SceneMain());
     Scenes.navigate("main");
-
-    Lunanore.run();
 });
 
 window.addEventListener("resize", () => {

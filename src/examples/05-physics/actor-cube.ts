@@ -1,26 +1,30 @@
-import * as RAPIER from "@dimforge/rapier3d-compat";
-import { Actor, Assets } from "../../lunanore";
+import * as THREE from "three";
+import { Actor, Assets, Scenes } from "../../lunanore";
+import { RigidBody, RigidBodyType } from "./rigidbody";
+import { Collider } from "./collider";
 
 export class ActorCube extends Actor {
-    private _body: RAPIER.RigidBody;
-    private _collider: RAPIER.Collider;
+    private _body: RigidBody;
+    private _collider: Collider;
 
-    constructor(world: RAPIER.World) {
-        super("cube", Assets.getModel("cube"));
+    constructor() {
+        super("cube", Assets.getModel("cube").clone());
 
-        let bodyDesc = RAPIER.RigidBodyDesc.dynamic();
-        this._body = world.createRigidBody(bodyDesc);
-        this._body.setTranslation({ x: 0, y: 1, z: 0 }, true);
+        this._body = new RigidBody(RigidBodyType.DYNAMIC);
+        this._body.position = new THREE.Vector3(0, 30, 0);
 
-        let colliderDesc = RAPIER.ColliderDesc.cuboid(1, 1, 1);
-        this._collider = world.createCollider(colliderDesc, this._body);
+        this._collider = Collider.cube(1, this._body);
+
+        this.position.y = 30;
     }
 
     public async update(dt: number) {
-        const pos = this._body.translation();
+        this.position.copy(this._body.position);
+        this.rotation.copy(this._body.rotation);
 
-        this.position.x = pos.x;
-        this.position.y = pos.y;
-        this.position.z = pos.z;
+        if (this.position.y < -50) {
+
+            Scenes.scene.remove(this);
+        }
     }
 }

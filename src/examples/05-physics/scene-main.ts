@@ -1,46 +1,54 @@
-import * as RAPIER from "@dimforge/rapier3d-compat";
 import * as THREE from "three";
 import { Assets, Model, Scene } from "../../lunanore";
-import { ActorFloor } from "./actor-floor";
 import { ActorCube } from "./actor-cube";
+import { Physics } from "./physics";
+import { ActorFloor } from "./actor-floor";
 
 export class SceneMain extends Scene {
     private _timer: number = 0;
-    private _world: RAPIER.World;
 
     public async init() {
-        Assets.addModel("floor", Model.box(10, 0.1, 10));
-        Assets.addModel("cube", Model.cube());
+        const matFloor = new THREE.MeshStandardMaterial();
+        matFloor.color = new THREE.Color(0.2, 1, 0.3);
 
-        await RAPIER.init();
+        const matCube = new THREE.MeshStandardMaterial();
+        matCube.color = new THREE.Color(0.2, 0, 0.8);
 
-        this._world = new RAPIER.World({ x: 0, y: -9.81, z: 0 });
-        //this.add(new ActorFloor(this._world));
+        Assets.addModel("floor", Model.box(20, 0.1, 20, matFloor));
+        Assets.addModel("cube", Model.cube(1, matCube));
 
-        this.camera.position.z = 12;
-        this.camera.position.y = 8;
-        this.camera.rotation.x = THREE.MathUtils.DEG2RAD * -35;
+        await Physics.init();
+
+        this.add(new ActorFloor());
+
+        this.camera.position.z = 20;
+        this.camera.position.y = 20;
+        this.camera.rotation.x = THREE.MathUtils.DEG2RAD * -45;
     }
 
     public async update(dt: number) {
         await this.updateCubes(dt);
+        await this.updateCounter();
 
-        this._world.step();
+        await Physics.update(dt);
+    }
+
+    private async updateCounter() {
+        const cubes = this.actors.filter(x => x.tag == "cube");
+
+        const el = document.getElementById("counter");
+        el!.innerHTML = "Cubes: " + cubes.length;
     }
 
     private async updateCubes(dt: number) {
         const cubes = this.actors.filter(x => x.tag == "cube");
 
-        if (cubes.length >= 10) {
-            return;
-        }
-
-        if (this._timer < 20) {
+        if (this._timer < 10) {
             this._timer++;
             return;
         }
 
-        this.add(new ActorCube(this._world));
+        this.add(new ActorCube());
         this._timer = 0;
     }
 }
