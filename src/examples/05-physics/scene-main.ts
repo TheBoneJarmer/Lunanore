@@ -43,7 +43,7 @@ export class SceneMain extends Scene {
     private async updateCubes(dt: number) {
         const cubes = this.actors.filter(x => x.tag == "cube");
 
-        if (this._timer < 10) {
+        if (this._timer < 4) {
             this._timer++;
             return;
         }
