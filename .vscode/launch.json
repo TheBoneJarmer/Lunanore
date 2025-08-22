@@ -43,9 +43,9 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "05 - LSD",
+            "name": "05 - Physics",
             "runtimeExecutable": "vite",
-            "cwd": "${workspaceFolder}/src/examples/05-lsd",
+            "cwd": "${workspaceFolder}/src/examples/05-physics",
             "internalConsoleOptions": "neverOpen",
             "args": []
         },

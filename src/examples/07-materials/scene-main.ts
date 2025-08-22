@@ -1,24 +1,25 @@
 import * as THREE from "three";
 import { Assets, Model, Scene } from "../../lunanore";
-import { ActorCube } from "./actor-cube";
+import { ActorObject } from "./actor-object";
 
 export class SceneMain extends Scene {
     public async init() {
         const mat = new THREE.MeshStandardMaterial();
-        mat.map = await Assets.importTexture("planks", "assets/planks.png");
-        mat.aoMap = await Assets.importTexture("planks_ao", "assets/planks_ao.png");
-        mat.metalnessMap = await Assets.importTexture("planks_metal", "assets/planks_metal.png");
-        mat.roughnessMap = await Assets.importTexture("planks_roughness", "assets/planks_roughness.png");
-        mat.normalMap = await Assets.importTexture("planks_normal", "assets/planks_normal.png");
+        mat.map = await Assets.importTexture("rock", "assets/rock.png");
+        mat.aoMap = await Assets.importTexture("rock_ao", "assets/rock_ao.png");
+        mat.displacementMap = await Assets.importTexture("rock_disp", "assets/rock_disp.png");
+        mat.displacementScale = 1;
+        mat.displacementBias = 1;
+        mat.roughnessMap = await Assets.importTexture("rock_roughness", "assets/rock_rough.png");
+        mat.normalMap = await Assets.importTexture("rock_normal", "assets/rock_normal.png");
 
-        const model = Model.cube(1, mat);
-        Assets.addModel("cube", model);
+        const model = Model.sphere(1, 128, 128, mat);
+        Assets.addModel("obj", model);
 
-        const cube = new ActorCube();
+        const cube = new ActorObject();
         this.add(cube);
 
-        this.camera.position.z = 4;
-        this.light.position.x *= -1;
+        this.camera.position.z = 8;
     }
 
     public async update(dt: number) {
