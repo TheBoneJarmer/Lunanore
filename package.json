@@ -25,6 +25,8 @@
     "vite": "^7.1.2"
   },
   "dependencies": {
+    "@dimforge/rapier3d": "^0.18.2",
+    "@dimforge/rapier3d-compat": "^0.18.2",
     "@types/three": "^0.178.1",
     "three": "^0.178.0"
   }
