@@ -10,3 +10,6 @@ export * from "./scenes";
 export * from "./sound";
 export * from "./sound-instance";
 export * from "./joystick";
+export * from "./collider";
+export * from "./physics";
+export * from "./rigidbody";

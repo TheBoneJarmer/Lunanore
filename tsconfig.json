@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "outDir": "dist",
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
     "strict": true,
     "strictNullChecks": false,
     "declaration": true,
     "sourceMap": true,
+    "skipLibCheck": false
   },
   "include": [
     "src/lunanore/*"

@@ -100,4 +100,9 @@ export enum ShadowQuality {
     MEDIUM,
     HIGH,
     ULTRA
-}
+};
+
+export enum RigidBodyType {
+    DYNAMIC,
+    STATIC
+};

@@ -1,7 +1,6 @@
 import * as THREE from "three";
-import { Actor, Assets, Scenes } from "../../lunanore";
-import { RigidBody, RigidBodyType } from "./rigidbody";
-import { Collider } from "./collider";
+import { Actor, Assets, Collider, RigidBody, Scenes } from "../../lunanore";
+import { RigidBodyType } from "../../lunanore/enums";
 
 export class ActorCube extends Actor {
     private _body: RigidBody;

@@ -1,9 +1,10 @@
 import * as THREE from "three";
-import { Assets, Keyboard, Model, Scene } from "../../lunanore";
-import { ActorCube } from "./actor-cube";
-import { Physics } from "./physics";
-import { ActorFloor } from "./actor-floor";
+
+import { Assets, Keyboard, Model, Scene, Physics } from "../../lunanore";
 import { Keys } from "../../lunanore/enums";
+
+import { ActorCube } from "./actor-cube";
+import { ActorFloor } from "./actor-floor";
 
 export class SceneMain extends Scene {
     private _timer: number = 0;
@@ -32,7 +33,7 @@ export class SceneMain extends Scene {
         await this.updateCubes(dt);
         await this.updateCounter();
 
-        await Physics.update(dt);
+        await Physics.update();
     }
 
     private async updateCounter() {
