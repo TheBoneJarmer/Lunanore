@@ -29,8 +29,8 @@ export class Collider {
     /**
      * Creates a cuboid collider with equal dimensions (cube) and attaches it to the given rigid body.
      * 
-     * @param size - The length of each side of the cube.
-     * @param body - The rigid body to attach the collider to.
+     * @param size The length of each side of the cube.
+     * @param body The rigid body to attach the collider to.
      * @returns A new `Collider` instance representing the cube.
      */
     public static cube(size: number, body: RigidBody): Collider {
@@ -44,10 +44,10 @@ export class Collider {
     /**
      * Creates a box-shaped collider and attaches it to the given rigid body.
      * 
-     * @param width - The width of the box.
-     * @param height - The height of the box.
-     * @param depth - The depth of the box.
-     * @param body - The rigid body to attach the collider to.
+     * @param width The width of the box.
+     * @param height The height of the box.
+     * @param depth The depth of the box.
+     * @param body The rigid body to attach the collider to.
      * @returns A new `Collider` instance representing the box.
      */
     public static box(width: number, height: number, depth: number, body: RigidBody): Collider {
@@ -61,8 +61,8 @@ export class Collider {
     /**
      * Creates a spherical collider and attaches it to the given rigid body.
      * 
-     * @param radius - The radius of the sphere.
-     * @param body - The rigid body to attach the collider to.
+     * @param radius The radius of the sphere.
+     * @param body The rigid body to attach the collider to.
      * @returns A new `Collider` instance representing the sphere.
      */
     public static sphere(radius: number, body: RigidBody): Collider {
@@ -76,9 +76,9 @@ export class Collider {
     /**
      * Creates a capsule-shaped collider and attaches it to the given rigid body.
      * 
-     * @param halfHeight - Half the height of the capsule (excluding the hemispherical ends).
-     * @param radius - The radius of the capsule's hemispherical ends.
-     * @param body - The rigid body to attach the collider to.
+     * @param halfHeight Half the height of the capsule (excluding the hemispherical ends).
+     * @param radius The radius of the capsule's hemispherical ends.
+     * @param body The rigid body to attach the collider to.
      * @returns A new `Collider` instance representing the capsule.
      */
     public static capsule(halfHeight: number, radius: number, body: RigidBody): Collider {
@@ -92,9 +92,9 @@ export class Collider {
     /**
      * Creates a cylinder-shaped collider and attaches it to the given rigid body.
      * 
-     * @param halfHeight - Half the height of the cylinder.
-     * @param radius - The radius of the cylinder.
-     * @param body - The rigid body to attach the collider to.
+     * @param halfHeight Half the height of the cylinder.
+     * @param radius The radius of the cylinder.
+     * @param body The rigid body to attach the collider to.
      * @returns A new `Collider` instance representing the cylinder.
      */
     public static cylinder(halfHeight: number, radius: number, body: RigidBody): Collider {
@@ -108,9 +108,9 @@ export class Collider {
     /**
      * Creates a cone-shaped collider and attaches it to the given rigid body.
      * 
-     * @param halfHeight - Half the height of the cone.
-     * @param radius - The radius of the cone's base.
-     * @param body - The rigid body to attach the collider to.
+     * @param halfHeight Half the height of the cone.
+     * @param radius The radius of the cone's base.
+     * @param body The rigid body to attach the collider to.
      * @returns A new `Collider` instance representing the cone.
      */
     public static cone(halfHeight: number, radius: number, body: RigidBody): Collider {
@@ -124,11 +124,11 @@ export class Collider {
     /**
      * Creates a rounded cuboid collider and attaches it to the given rigid body.
      * 
-     * @param width - The width of the cuboid.
-     * @param height - The height of the cuboid.
-     * @param depth - The depth of the cuboid.
-     * @param borderRadius - The radius of the rounded edges.
-     * @param body - The rigid body to attach the collider to.
+     * @param width The width of the cuboid.
+     * @param height The height of the cuboid.
+     * @param depth The depth of the cuboid.
+     * @param borderRadius The radius of the rounded edges.
+     * @param body The rigid body to attach the collider to.
      * @returns A new `Collider` instance representing the rounded cuboid.
      */
     public static roundCuboid(width: number, height: number, depth: number, borderRadius: number, body: RigidBody): Collider {
@@ -142,8 +142,8 @@ export class Collider {
     /**
      * Creates a convex hull collider from a set of points and attaches it to the given rigid body.
      * 
-     * @param points - The vertices defining the convex hull, as a flat Float32Array.
-     * @param body - The rigid body to attach the collider to.
+     * @param points The vertices defining the convex hull, as a flat Float32Array.
+     * @param body The rigid body to attach the collider to.
      * @returns A new `Collider` instance representing the convex hull.
      */
     public static convexHull(points: Float32Array, body: RigidBody): Collider {
@@ -157,9 +157,9 @@ export class Collider {
     /**
      * Creates a triangle mesh collider from vertices and indices, and attaches it to the given rigid body.
      * 
-     * @param vertices - The vertices of the mesh, as a flat Float32Array.
-     * @param indices - The indices defining the mesh triangles, as a Uint32Array.
-     * @param body - The rigid body to attach the collider to.
+     * @param vertices The vertices of the mesh, as a flat Float32Array.
+     * @param indices The indices defining the mesh triangles, as a Uint32Array.
+     * @param body The rigid body to attach the collider to.
      * @returns A new `Collider` instance representing the triangle mesh.
      */
     public static trimesh(vertices: Float32Array, indices: Uint32Array, body: RigidBody): Collider {
@@ -173,11 +173,11 @@ export class Collider {
     /**
      * Creates a heightfield collider from a grid of heights and attaches it to the given rigid body.
      * 
-     * @param cols - The number of columns in the heightfield grid.
-     * @param rows - The number of rows in the heightfield grid.
-     * @param heights - The height values for each grid cell, as a Float32Array.
-     * @param scale - The scale to apply to the heightfield, as a THREE.Vector3.
-     * @param body - The rigid body to attach the collider to.
+     * @param cols The number of columns in the heightfield grid.
+     * @param rows The number of rows in the heightfield grid.
+     * @param heights The height values for each grid cell, as a Float32Array.
+     * @param scale The scale to apply to the heightfield, as a THREE.Vector3.
+     * @param body The rigid body to attach the collider to.
      * @returns A new `Collider` instance representing the heightfield.
      */
     public static heightfield(cols: number, rows: number, heights: Float32Array, scale: THREE.Vector3, body: RigidBody): Collider {
